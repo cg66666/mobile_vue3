@@ -1,5 +1,4 @@
 <template>
-  <div class="center">{{ active }}</div>
   <Tabbar v-model="active">
     <TabbarItem name="home" icon="home-o">首页</TabbarItem>
     <TabbarItem name="order" icon="bars">订单</TabbarItem>
@@ -16,5 +15,6 @@ const active = ref('home');
 <style>
 .center {
   text-align: center;
+  width: 39px;
 }
 </style>
