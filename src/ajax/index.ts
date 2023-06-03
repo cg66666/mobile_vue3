@@ -1,7 +1,7 @@
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios';
 import { showNotify } from 'vant';
 export const instance = axios.create({
-  baseURL: '/test',
+  baseURL: '/mobile_Vue3',
   timeout: 30 * 1000 // 统一设置超时时间
 });
 instance.interceptors.response.use(
@@ -25,17 +25,21 @@ instance.interceptors.response.use(
  * @param config  请求配置
  * @returns
  */
-
 export const get = <T>(
   url: string,
   params: Record<string, any> = {},
   config?: AxiosRequestConfig
-): Promise<T> =>
-  new Promise((resolve) => {
+): Promise<AxiosResponse<T>> =>
+  new Promise((resolve, reject) => {
     const mergeConfig = { ...config, params };
-    instance.get<T>(url, mergeConfig).then((res) => {
-      resolve(res.data);
-    });
+    instance
+      .get<T>(url, mergeConfig)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch(() => {
+        reject();
+      });
   });
 
 /**
@@ -49,9 +53,15 @@ export const post = <T>(
   url: string,
   data: { [key: string]: any } = {},
   config?: AxiosRequestConfig
-): Promise<T> =>
-  new Promise((resolve) => {
-    instance.post<T>(url, data, config).then((res) => {
-      resolve(res.data);
-    });
+): Promise<AxiosResponse<T>> =>
+  new Promise((resolve, reject) => {
+    instance
+      .post<T>(url, data, config)
+      .then((res) => {
+        n;
+        resolve(res);
+      })
+      .catch(() => {
+        reject();
+      });
   });

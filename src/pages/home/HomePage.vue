@@ -17,7 +17,7 @@ const switchShow = () => (showCover.value = !showCover.value);
 .coverPage {
   position: absolute;
   width: 100%;
-  height: 100rem;
+  height: 100%;
   left: 0;
   right: 0;
 }

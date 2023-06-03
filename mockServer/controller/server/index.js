@@ -1,5 +1,5 @@
 /**
- * 文件名就是请求的前置route
+ * 文件名就是请求的前置route，使用fs统一将
  */
 const koaRouter = require('koa-router');
 const fs = require('fs');
