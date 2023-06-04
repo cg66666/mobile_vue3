@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted } from 'vue';
 import { getInfo, getInfoPost } from '@/service/test';
 import BottomTabs from '@/pages/bottomTabs/BottomTabs.vue';
 import '@/assets/iconfont/iconfont.js';
 onMounted(() => {
+  window.localStorage.removeItem('searchHistory');
   getInfo(111);
   getInfoPost(111);
-});
-onUnmounted(() => {
-  window.localStorage.removeItem('searchHistory');
 });
 </script>
 

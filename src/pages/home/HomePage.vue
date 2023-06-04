@@ -10,6 +10,7 @@ import HomeSearchMode from '@/components/HomeSearchMode.vue';
 import SearchCoverPage from '@/components/SearchCoverPage.vue';
 import { ref } from 'vue';
 const showCover = ref(false);
+// const switchShow = () => (showCover.value = !showCover.value);
 const switchShow = () => (showCover.value = !showCover.value);
 </script>
 

@@ -7,7 +7,7 @@ router_home.get(
   async (ctx, next) => {
     // console.log('111login++', ctx.query, getHomeSearchData);
     const math = Math.round(Math.random() * 100);
-    // const math = 91;
+    // const math = 1;
     console.log('随机数', math);
 
     if (math > 90) {
