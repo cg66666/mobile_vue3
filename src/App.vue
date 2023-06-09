@@ -24,5 +24,6 @@ onMounted(() => {
   color: $textColor;
   width: 100%;
   height: 100%;
+  color: rgb(54, 54, 54);
 }
 </style>

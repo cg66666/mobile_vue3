@@ -58,7 +58,6 @@ export const post = <T>(
     instance
       .post<T>(url, data, config)
       .then((res) => {
-        n;
         resolve(res);
       })
       .catch(() => {

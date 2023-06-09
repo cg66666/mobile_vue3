@@ -22,41 +22,7 @@
       </div>
       <div class="showResult">
         <div class="showContainer">
-          <div v-if="searchStatus === statusText.NONE && handleArray.length" class="history">
-            <div class="title">历史搜索</div>
-            <div class="content">
-              <div
-                v-for="(item, index) in handleArray"
-                :key="index"
-                class="item"
-                @click="
-                  () => {
-                    if (typeof item === 'boolean') {
-                      if (item) {
-                      }
-                      return;
-                    }
-                    goSearch(false);
-                  }
-                "
-              >
-                <SvgIcon
-                  v-if="typeof item === 'boolean'"
-                  :name="item ? 'up' : 'Down'"
-                  size="14px"
-                  @click="
-                    () => {
-                      historyIsFold = !historyIsFold;
-                    }
-                  "
-                />
-                <div v-else>
-                  {{ item }}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div v-else-if="searchWordList && searchWordList.length">
+          <div v-if="searchWordList && searchWordList.length">
             <div
               class="searchItem"
               v-for="item in searchWordList"
@@ -66,6 +32,36 @@
               <SvgIcon className="itemIcon" name="sousuo" color="#aaa" size="15px" />{{
                 item.label
               }}
+            </div>
+          </div>
+          <div v-else-if="searchStatus === statusText.NONE && handleArray.length" class="history">
+            <div class="title">历史搜索</div>
+            <div class="content">
+              <div
+                v-for="(item, index) in handleArray"
+                :key="index"
+                class="item"
+                @click="
+                  () => {
+                    if (typeof item === 'boolean') return;
+                    goSearch(false);
+                  }
+                "
+              >
+                <SvgIcon
+                  v-if="typeof item === 'boolean'"
+                  :name="item ? 'up' : 'Down'"
+                  size="14px"
+                  @click.stop="
+                    () => {
+                      historyIsFold = !historyIsFold;
+                    }
+                  "
+                />
+                <div v-else>
+                  {{ item }}
+                </div>
+              </div>
             </div>
           </div>
           <div v-else-if="searchStatus !== statusText.NONE" class="searchText">
@@ -98,7 +94,6 @@ import { Field } from 'vant';
 import { getSearchWords, type wordList } from '@/service/home';
 import { debounce } from '@/utils/index';
 // import _ from 'lodash';
-
 enum statusText {
   NONE = '未开始/已完成', // 未开始状态
   DOING = '搜索中', // 搜索中状态
@@ -121,7 +116,7 @@ const showResultPage = ref(false);
 // 历史搜索词
 const historyList = ref<string[]>([]);
 // 是否折叠
-const historyIsFold = ref(false);
+const historyIsFold = ref(true);
 
 // 获取搜索结果列表
 const getWordList = debounce(() => {
@@ -148,9 +143,10 @@ const goSearch = (needWord?: boolean) => {
       .getItem('searchHistory')
       ?.split(',')
       .filter((item) => item) || [];
-  if (!tempArray.includes(searchWord.value)) tempArray.push(searchWord.value);
+  if (searchWord.value && !tempArray.includes(searchWord.value)) tempArray.push(searchWord.value);
   historyList.value = tempArray;
   window.localStorage.setItem('searchHistory', tempArray.join(','));
+  console.log('333tempArray', tempArray);
 };
 
 const handleArray = computed(() => {
@@ -174,9 +170,8 @@ const handleArray = computed(() => {
       length = string.length;
     }
   }
-  console.log('index', index);
   let newArray: (string | boolean)[] = [];
-  newArray = historyList.value;
+  newArray = [...historyList.value];
   // 最终判断是否超行与折叠
   if (needWrap) {
     if (historyIsFold.value) {
@@ -186,7 +181,6 @@ const handleArray = computed(() => {
     }
     newArray.push(false);
   }
-  console.log('newArray999', newArray);
   return newArray;
 });
 
@@ -207,6 +201,11 @@ watchEffect(() => {
     return;
   }
   getWordList();
+});
+watchEffect(() => {
+  console.log('333searchWordList', searchWordList.value);
+  console.log('333searchStatus', searchStatus.value);
+  console.log('333handleArray', handleArray.value);
 });
 </script>
 
