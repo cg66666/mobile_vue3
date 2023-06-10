@@ -25,7 +25,7 @@
   "twiceList": [
     {
       "img": "dengpao",
-      "label": "外卖"
+      "label": "外卖111"
     },
     {
       "img": "yinpin",
@@ -45,7 +45,7 @@
     },
     {
       "img": "dengpao",
-      "label": "外卖"
+      "label": "外卖111"
     },
     {
       "img": "yinpin",
@@ -65,7 +65,7 @@
     },
     {
       "img": "dengpao",
-      "label": "外卖"
+      "label": "外卖111"
     },
     {
       "img": "yinpin",
@@ -85,7 +85,7 @@
     },
     {
       "img": "dengpao",
-      "label": "外卖"
+      "label": "外卖222"
     },
     {
       "img": "yinpin",
@@ -105,7 +105,7 @@
     },
     {
       "img": "dengpao",
-      "label": "外卖"
+      "label": "外卖222"
     },
     {
       "img": "yinpin",
@@ -125,7 +125,7 @@
     },
     {
       "img": "dengpao",
-      "label": "外卖"
+      "label": "外卖222"
     },
     {
       "img": "yinpin",
@@ -145,7 +145,7 @@
     },
     {
       "img": "dengpao",
-      "label": "外卖"
+      "label": "外卖333"
     },
     {
       "img": "yinpin",
@@ -165,7 +165,7 @@
     },
     {
       "img": "dengpao",
-      "label": "外卖"
+      "label": "外卖333"
     },
     {
       "img": "yinpin",
@@ -185,7 +185,67 @@
     },
     {
       "img": "dengpao",
-      "label": "外卖"
+      "label": "外卖333"
+    },
+    {
+      "img": "yinpin",
+      "label": "蔬菜水果"
+    },
+    {
+      "img": "xuexi",
+      "label": "超市便利"
+    },
+    {
+      "img": "tuxiangleixing",
+      "label": "品质百货"
+    },
+    {
+      "img": "tiaoseban",
+      "label": "看病买药"
+    },
+    {
+      "img": "dengpao",
+      "label": "外卖444"
+    },
+    {
+      "img": "yinpin",
+      "label": "蔬菜水果"
+    },
+    {
+      "img": "xuexi",
+      "label": "超市便利"
+    },
+    {
+      "img": "tuxiangleixing",
+      "label": "品质百货"
+    },
+    {
+      "img": "tiaoseban",
+      "label": "看病买药"
+    },
+    {
+      "img": "dengpao",
+      "label": "外卖444"
+    },
+    {
+      "img": "yinpin",
+      "label": "蔬菜水果"
+    },
+    {
+      "img": "xuexi",
+      "label": "超市便利"
+    },
+    {
+      "img": "tuxiangleixing",
+      "label": "品质百货"
+    },
+    {
+      "img": "tiaoseban",
+      "label": "看病买药"
+    },
+    {
+      "img": "dengpao",
+      "label": "外卖444"
     },
     {
       "img": "yinpin",
@@ -281,8 +341,8 @@
     }
   ],
   "countdown": {
-    "startTime": "2023-06-08 13:00:00",
-    "endTime": "2023-06-10 13:00:00",
+    "startTime": "2023-08-010 13:00:00",
+    "endTime": "2023-06-13 13:00:00",
     "goods": {
       "imgUrl": "/imgs/index_page/count-down-p.png",
       "name": "腊鸡腿菜饭 + 卤香干 + 冰红茶",

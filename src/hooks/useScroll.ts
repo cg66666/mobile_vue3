@@ -1,38 +1,91 @@
 import { onMounted, onUnmounted, ref, type Ref } from 'vue';
 import { throttle } from '@/utils/index';
-export default function useScroll(elRef: Ref<HTMLElement>) {
+export enum directionEnum {
+  VERTICAL,
+  LEVAL
+}
+interface IOption {
+  initScroll: Ref<number>;
+  direction: directionEnum;
+}
+// interface IFunParameter {
+//   clientHeight: number;
+//   scrollHeight: number;
+//   scrollTop: number;
+//   clientWidth: number;
+//   scrollLeft: number;
+//   scrollWidth: number;
+// }
+/**
+ *
+ * @param elRef 传入的 ref Dom节点
+ * @param option 横向滚动范围限制(不包括window)
+ * @returns 返回的为ref格式
+ */
+export function useScroll(elRef: Ref<HTMLElement>, option?: IOption) {
   let el: HTMLElement | Window = window;
   const isReachBottom = ref(false);
-  const clientHeight = ref(0);
-  const scrollTop = ref(0);
-  const scrollHeight = ref(0);
+  const currentClientHeight = ref(0);
+  const currentScrollTop = ref(0);
+  const currentScrollHeight = ref(0);
+  const currentClientWidth = ref(0);
+  const currentScrollLeft = ref(0);
+  const currentScrollWidth = ref(0);
+  // const optionHandler = (el: HTMLElement, funOption: IOption) => {
+  //   const { clientWidth, scrollLeft, scrollWidth } = el;
+  //   const { initScroll, direction } = funOption;
+  //   if (direction === directionEnum.LEVAL) {
+  //     const diff = scrollLeft - initScroll.value;
+  //     if (Math.abs(diff) > clientWidth) {
+  //       if (diff > 0) {
+  //         el.scrollLeft = initScroll.value + scrollWidth;
+  //       } else {
+  //         el.scrollLeft = initScroll.value - scrollWidth;
+  //       }
+  //     }
+  //   }
+  // };
+  const setVal = (el: HTMLElement) => {
+    const { clientHeight, scrollHeight, scrollTop, clientWidth, scrollLeft, scrollWidth } = el;
+    currentClientHeight.value = clientHeight;
+    currentScrollHeight.value = scrollHeight;
+    currentScrollTop.value = scrollTop;
+    currentClientWidth.value = clientWidth;
+    currentScrollLeft.value = scrollLeft;
+    currentScrollWidth.value = scrollWidth;
+  };
   const scrollListenerHandler = throttle(() => {
     if (el === window) {
-      clientHeight.value = document.documentElement.clientHeight;
-      scrollHeight.value = document.documentElement.scrollHeight;
-      scrollTop.value = document.documentElement.scrollTop;
+      setVal(document.documentElement);
     } else {
-      clientHeight.value = (el as HTMLElement).clientHeight;
-      scrollTop.value = (el as HTMLElement).scrollTop;
-      scrollHeight.value = (el as HTMLElement).scrollHeight;
+      setVal(el as HTMLElement);
+      // console.log('clientWidth', (el as HTMLElement).clientWidth);
     }
-    if (clientHeight.value + scrollTop.value >= scrollHeight.value) {
+    if (currentClientHeight.value + currentScrollTop.value >= currentScrollHeight.value) {
       // homeStore.fetchHouselistData()
       isReachBottom.value = true;
     }
-    console.log('clientWidth', (el as HTMLElement).clientWidth);
-    console.log('scrollLeft', (el as HTMLElement).scrollLeft);
-    console.log('scrollWidth', (el as HTMLElement).scrollWidth);
-  }, 100);
+  }, 50);
   onMounted(() => {
-    console.log(111, elRef.value);
     if (elRef?.value) {
       el = elRef.value;
+      setVal(el as HTMLElement);
+    } else {
+      setVal(document.documentElement);
     }
+
     el.addEventListener('scroll', scrollListenerHandler as unknown as EventListener);
   });
   onUnmounted(() => {
     el.removeEventListener('scroll', scrollListenerHandler as unknown as EventListener);
   });
-  return { isReachBottom, clientHeight, scrollTop, scrollHeight };
+  return {
+    isReachBottom,
+    clientHeight: currentClientHeight,
+    scrollTop: currentScrollTop,
+    scrollHeight: currentScrollHeight,
+    clientWidth: currentClientWidth,
+    scrollLeft: currentScrollLeft,
+    scrollWidth: currentScrollWidth
+  };
 }

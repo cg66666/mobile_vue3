@@ -5,6 +5,9 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * 这里的size长度单位填写rem，如果使用px会丢失响应式
+ */
 const props = defineProps<{ name: string; className?: string; color?: string; size?: string }>();
 </script>
 
