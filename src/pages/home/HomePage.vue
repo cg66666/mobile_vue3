@@ -1,5 +1,9 @@
 <template>
-  <HomeSearchMode defaultSearchWord="烧烤" @click="switchShow" class="fixLogic"></HomeSearchMode>
+  <HomeSearchMode
+    :defaultSearchWord="searchWordList"
+    @click="switchShow"
+    class="fixLogic"
+  ></HomeSearchMode>
   <Transition name="coverPage" class="coverPage">
     <SearchCoverPage defaultSearchWord="蜜雪冰城" v-if="showCover" @switchShow="switchShow" />
   </Transition>
@@ -24,17 +28,19 @@ import Countdown from '@/components/Countdown.vue';
 import WhiteCard from '@/components/WhiteCard.vue';
 import { ref, onMounted } from 'vue';
 import { getHomeInitData, type firstListType } from '@/service/home';
+import { watchEffect } from 'vue';
 const showCover = ref(false);
 const countdownTime = ref({ startTime: '2023-06-06 13:00:00', endTime: '2023-06-08 20:30:00' });
 const firstLists = ref<firstListType[]>([]);
 const title = ref('');
 const twiceLists = ref<firstListType[]>([]);
+const searchWordList = ref<string[]>([]);
 const switchShow = () => (showCover.value = !showCover.value);
 onMounted(() => {
   getHomeInitData().then((res) => {
     console.log('res', res?.data);
     if (res) {
-      const { countdown, firstList, firstListTitle, twiceList } = res.data;
+      const { countdown, firstList, firstListTitle, twiceList, searchDefultWordList } = res.data;
       countdownTime.value = {
         startTime: countdown.startTime,
         endTime: countdown.endTime
@@ -42,8 +48,12 @@ onMounted(() => {
       firstLists.value = firstList;
       title.value = firstListTitle;
       twiceLists.value = twiceList;
+      searchWordList.value = searchDefultWordList;
     }
   });
+});
+watchEffect(() => {
+  console.log('countdownTime', countdownTime.value);
 });
 </script>
 
@@ -51,6 +61,7 @@ onMounted(() => {
 .fixLogic {
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
 .coverPage {
   position: absolute;
@@ -58,6 +69,7 @@ onMounted(() => {
   height: 100%;
   left: 0;
   right: 0;
+  z-index: 1000;
 }
 .coverPage-enter-from,
 .coverPage-leave-to {

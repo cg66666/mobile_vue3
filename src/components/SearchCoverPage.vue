@@ -2,7 +2,7 @@
   <div>
     <div class="searchPage">
       <div class="headContainer">
-        <SvgIcon name="left" size="14px" @click="() => emit('switchShow')" />
+        <SvgIcon name="left" size="0.36rem" @click="() => emit('switchShow')" />
         <div class="searchContainer">
           <Field
             class="vantField"
@@ -29,7 +29,7 @@
               :key="item.label"
               @click="() => goSearch(true)"
             >
-              <SvgIcon className="itemIcon" name="sousuo" color="#aaa" size="15px" />{{
+              <SvgIcon className="itemIcon" name="sousuo" color="#aaa" size="0.385rem" />{{
                 item.label
               }}
             </div>
@@ -51,7 +51,7 @@
                 <SvgIcon
                   v-if="typeof item === 'boolean'"
                   :name="item ? 'up' : 'Down'"
-                  size="14px"
+                  size="0.36rem"
                   @click.stop="
                     () => {
                       historyIsFold = !historyIsFold;
@@ -75,7 +75,7 @@
         <div class="headContainer">
           <SvgIcon
             name="left"
-            size="14px"
+            size="0.36rem"
             @click="
               () => {
                 showResultPage = false;

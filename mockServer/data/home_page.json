@@ -326,6 +326,7 @@
       "imgUrl": "/imgs/index_page/transformer-icon15.png"
     }
   ],
+  "searchDefultWordList": ["南锣鼓巷美食", "方砖厂69号炸酱面", "茶汤李京味餐厅", "麦当劳&麦咖啡"],
   "scrollBarInfoList": [
     {
       "type": "bean",
@@ -341,7 +342,7 @@
     }
   ],
   "countdown": {
-    "startTime": "2023-08-010 13:00:00",
+    "startTime": "2023-06-10 13:00:00",
     "endTime": "2023-06-13 13:00:00",
     "goods": {
       "imgUrl": "/imgs/index_page/count-down-p.png",

@@ -28,6 +28,7 @@ export interface initData {
   countdown: countdownType;
   firstListTitle: string;
   twiceList: firstListType[];
+  searchDefultWordList: string[];
 }
 export const getHomeInitData = async (): Promise<AxiosResponse<initData> | undefined> => {
   const res = await get<initData>('/home/getInfo');
