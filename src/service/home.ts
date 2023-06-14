@@ -23,12 +23,22 @@ export type countdownType = {
   startTime: string;
   endTime: string;
 };
+export type delicacyListType = {
+  startTime?: string;
+  endTime?: string;
+  goods: {
+    imgUrl: string;
+    name: string;
+    price: number;
+  };
+};
 export interface initData {
   firstList: firstListType[];
   countdown: countdownType;
   firstListTitle: string;
   twiceList: firstListType[];
   searchDefultWordList: string[];
+  delicacyList: delicacyListType[];
 }
 export const getHomeInitData = async (): Promise<AxiosResponse<initData> | undefined> => {
   const res = await get<initData>('/home/getInfo');

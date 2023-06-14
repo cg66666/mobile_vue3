@@ -1,7 +1,7 @@
 <template>
   <div class="FlashSaleContainer">
-    <WhiteCard className="card">
-      <img :src="getAssetsFile('index_page/count-down.png')" alt="" />
+    <WhiteCard title="特价团购">
+      <!-- <div>特价团购</div> -->
       <div class="timeContainer">
         <div>天：{{ formatTime.Day }}</div>
         &nbsp; &nbsp; &nbsp;
@@ -11,14 +11,17 @@
         &nbsp; &nbsp; &nbsp;
         <div>秒：{{ formatTime.Second }}</div>
       </div>
+      <img v-lazy="props.imgUrl" />
+      <div class="goodInfo">
+        <div>岩小石-韩式炸鸡</div>
+        <div class="price">￥ 19.8</div>
+      </div>
     </WhiteCard>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import { getAssetsFile } from '@/utils/index';
-import WhiteCard from '@/components/WhiteCard.vue';
 let timer: number;
 type formatTimeType = {
   Day: string;
@@ -27,7 +30,7 @@ type formatTimeType = {
   Second: string;
 };
 const props = withDefaults(
-  defineProps<{ startTime?: string; endTime?: string; title?: string }>(),
+  defineProps<{ startTime?: string; endTime?: string; title?: string; imgUrl: string }>(),
   {
     startTime: '2023-06-06 13:00:00',
     endTime: '2023-06-08 20:30:00',
@@ -82,10 +85,18 @@ watch(props, () => {
 <style lang="scss" scoped>
 .FlashSaleContainer {
   font-size: 20px;
-  .card {
-    .timeContainer {
-      display: flex;
-    }
+  display: flex;
+  justify-content: space-between;
+
+  img {
+    width: 100px;
+    height: 50px;
+  }
+  .timeContainer {
+    display: flex;
+  }
+  .price {
+    color: rgb(255, 101, 9);
   }
 }
 </style>

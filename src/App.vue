@@ -25,5 +25,9 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   color: rgb(54, 54, 54);
+  .plugIn-lazyload {
+    width: 100px;
+    height: 80px;
+  }
 }
 </style>

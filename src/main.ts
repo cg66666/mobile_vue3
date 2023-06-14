@@ -6,12 +6,13 @@ import 'amfe-flexible';
 import 'vant/lib/index.css';
 import 'normalize.css';
 import globalComponent from '@/components/global/index';
+import Plugin from '@/plugins/index';
 
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
-
+app.use(Plugin);
 // const w = document.documentElement.clientWidth;
 // document.documentElement.style.fontSize = w / 10 + 'px';
 

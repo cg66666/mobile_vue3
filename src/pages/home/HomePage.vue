@@ -12,11 +12,9 @@
     <div class="homeBody">
       <WhiteCard v-if="firstLists.length" :list-data="firstLists" :title="title" />
       <WhiteCard v-if="twiceLists.length" :list-data="twiceLists" />
-      <Countdown
-        class="countdown"
-        :start-time="countdownTime.startTime"
-        :end-time="countdownTime.endTime"
-      />
+      <div></div>
+      <!-- https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp -->
+      <DelicacyList :showDelicacyList="showDelicacyList" />
     </div>
   </div>
 </template>
@@ -24,36 +22,30 @@
 <script setup lang="ts">
 import HomeSearchMode from '@/components/HomeSearchMode.vue';
 import SearchCoverPage from '@/components/SearchCoverPage.vue';
-import Countdown from '@/components/Countdown.vue';
-import WhiteCard from '@/components/WhiteCard.vue';
-import { ref, onMounted } from 'vue';
-import { getHomeInitData, type firstListType } from '@/service/home';
-import { watchEffect } from 'vue';
+import DelicacyList from '@/components/DelicacyList.vue';
+import { ref, onMounted, inject } from 'vue';
+import { getHomeInitData, type firstListType, type delicacyListType } from '@/service/home';
+// 获取视口高度
+const viewportHeight = (inject('viewportHeight') as number) / 39 - 1.282 + 'rem';
 const showCover = ref(false);
-const countdownTime = ref({ startTime: '2023-06-06 13:00:00', endTime: '2023-06-08 20:30:00' });
 const firstLists = ref<firstListType[]>([]);
 const title = ref('');
 const twiceLists = ref<firstListType[]>([]);
 const searchWordList = ref<string[]>([]);
+const showDelicacyList = ref<delicacyListType[]>([]);
 const switchShow = () => (showCover.value = !showCover.value);
 onMounted(() => {
   getHomeInitData().then((res) => {
     console.log('res', res?.data);
     if (res) {
-      const { countdown, firstList, firstListTitle, twiceList, searchDefultWordList } = res.data;
-      countdownTime.value = {
-        startTime: countdown.startTime,
-        endTime: countdown.endTime
-      };
+      const { firstList, firstListTitle, twiceList, searchDefultWordList, delicacyList } = res.data;
       firstLists.value = firstList;
       title.value = firstListTitle;
       twiceLists.value = twiceList;
       searchWordList.value = searchDefultWordList;
+      showDelicacyList.value = delicacyList;
     }
   });
-});
-watchEffect(() => {
-  console.log('countdownTime', countdownTime.value);
 });
 </script>
 
@@ -88,8 +80,9 @@ watchEffect(() => {
 .homeBack {
   position: relative;
   top: -1px;
-  height: 1500px;
+  margin-bottom: 50px;
   background: $backgroundColor;
+  min-height: v-bind(viewportHeight);
   .homeBody {
     z-index: 999;
     position: relative;
