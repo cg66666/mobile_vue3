@@ -1,5 +1,19 @@
+/*汉仪字体*/
+@font-face {
+  font-family: '汉仪';
+  src: url(../font/1639364888700503.ttf);
+}
+
 $brandColor: rgb(255, 209, 0); // 品牌主色
 $textColor: rgb(51, 51, 51); // 主体内容文字色
 // $mainH1Fsize: 32px; // 大标题字号
 // $contentFsize: 14px; // 主体内容字号
 $backgroundColor: rgb(244, 244, 244); // 品牌底色
+
+// 默认将页面填满
+html,
+body,
+#app {
+  height: 100%;
+  font-family: '汉仪';
+}

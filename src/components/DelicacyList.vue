@@ -1,35 +1,36 @@
 <template>
   <div class="DelicacyContainer">
     <div>
-      <div v-for="(item, index) in state.leftList" :key="index">
+      <template v-for="(item, index) in state.leftList" :key="index">
         <Countdown
           v-if="index === 0"
           class="card"
           :start-time="item.startTime"
           :end-time="item.endTime"
           :imgUrl="item.goods.imgUrl"
+          :title="item.goods.name"
+          :price="item.goods.price"
         />
-        <WhiteCard v-else className="card">
+        <WhiteCard v-else class="card">
           <div>
             <img v-lazy="item.goods.imgUrl" />
             <div>{{ item.goods.name }}</div>
             <div class="price">￥ {{ item.goods.price }}</div>
           </div>
         </WhiteCard>
-      </div>
+      </template>
     </div>
     <div>
-      <div v-for="(item, index) in state.leftList" :key="index">
-        <WhiteCard className="card">
+      <template v-for="(item, index) in state.rightList" :key="index">
+        <WhiteCard class="card">
           <div>
             <img v-lazy="item.goods.imgUrl" />
             <div>{{ item.goods.name }}</div>
             <div class="price">￥ {{ item.goods.price }}</div>
           </div>
         </WhiteCard>
-      </div>
+      </template>
     </div>
-    <!-- width: 183px; -->
   </div>
 </template>
 
@@ -47,9 +48,6 @@ const countdownTime = ref({
   endTime: '2023-06-08 20:30:00',
   imgUrl: ''
 });
-
-// const leftList = ref<delicacyListType[]>([]);
-// const rightList = ref<delicacyListType[]>([]);
 watch(props, (nv) => {
   if (nv.showDelicacyList.length) {
     countdownTime.value = {
@@ -57,14 +55,13 @@ watch(props, (nv) => {
       endTime: nv.showDelicacyList[0].endTime || '',
       imgUrl: nv.showDelicacyList[0].goods.imgUrl
     };
-    console.log('countdownTime', countdownTime.value);
     const leftList: delicacyListType[] = [];
     const rightList: delicacyListType[] = [];
     nv.showDelicacyList.forEach((item, index) => {
       if ((index + 1) % 2 === 0) {
-        leftList.push(item);
-      } else {
         rightList.push(item);
+      } else {
+        leftList.push(item);
       }
     });
     state.rightList = rightList;

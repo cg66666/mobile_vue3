@@ -33,7 +33,7 @@ export function throttle<T>(fn: (...arg: T[]) => void | Promise<void>, delay: nu
 }
 
 /**
- * @name 获取assets静态资源
+ * @name 获取assets中图片的静态资源
  * @param url 从src/assets/imgs开始的地址
  * @returns
  */

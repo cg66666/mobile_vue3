@@ -1,5 +1,5 @@
 <template>
-  <div :class="`container ${props.className || ''}`">
+  <div class="container" :style="props.style">
     <div v-if="props.title" class="title">{{ props.title }}</div>
     <slot v-if="slots"></slot>
     <!-- <template v-if="props.listData?.length"> -->
@@ -15,90 +15,28 @@
 </template>
 
 <script setup lang="ts">
-import { useSlots, computed, ref, onMounted, type Ref, watch } from 'vue';
-import { useScroll } from '@/hooks/useScroll';
+import { useSlots, computed, ref, type Ref, watch, type CSSProperties } from 'vue';
+import { useScrollOrient } from '@/hooks/useScrollOrient';
 type dataType = {
   label: string;
   img: string;
 };
 const props = defineProps<{
-  className?: string;
   title?: string;
-  // mode?: modeEnum;
   listData?: dataType[];
   productData?: dataType;
+  style?: CSSProperties;
 }>();
-const scrollRation = 0.35;
-const List = ref<HTMLElement>();
-const { clientWidth, scrollLeft } = useScroll(List as Ref<HTMLElement>);
-const initScrollLeft = ref(0);
-const scrollData = ref<dataType[][]>([]);
-const currentIndex = ref<number>(0);
 const slots = computed(() => !!useSlots().default);
-const processedData = computed(() => {
-  if (!props.listData) return [];
-  let middleArray: dataType[] = [];
-  let finalArray: dataType[][] = [];
-  props.listData.forEach((item, index) => {
-    if (index && (index + 1) % 15 === 0) {
-      middleArray.push(item);
-      finalArray.push(middleArray);
-      middleArray = [];
-    } else {
-      middleArray.push(item);
-    }
-  });
-  return finalArray.length ? finalArray : [middleArray];
-});
+const List = ref<HTMLElement>();
+const scrollData = useScrollOrient(props.listData || [], List as Ref<HTMLElement>);
 watch(
-  currentIndex,
+  props,
   (nv) => {
-    const length = processedData.value.length;
-    let finalData: dataType[][] = [];
-    if (nv === 0) {
-      finalData = processedData.value.slice(0, 2);
-    } else if (nv + 1 === length) {
-      finalData = processedData.value.slice(nv - 1);
-    } else {
-      finalData = processedData.value.slice(nv - 1, nv + 2);
-    }
-    setTimeout(() => {
-      scrollData.value = finalData;
-      if (finalData.length === 3 || nv + 1 === length) {
-        initScrollLeft.value = clientWidth.value;
-        List.value!.scrollLeft = clientWidth.value;
-      }
-    }, 400);
+    console.log('props', props.style);
   },
-  { immediate: true }
+  { immediate: true, deep: true }
 );
-onMounted(() => {
-  if (List.value) {
-    List.value.addEventListener('touchend', () => {
-      let index = currentIndex.value;
-      let scroll = initScrollLeft.value;
-      if (scrollLeft.value > initScrollLeft.value) {
-        let remainder = scrollLeft.value % clientWidth.value;
-        if (remainder > clientWidth.value * scrollRation) {
-          scroll += clientWidth.value;
-          index++;
-        }
-      } else {
-        let diffVal = initScrollLeft.value - scrollLeft.value;
-        let remainder = diffVal % clientWidth.value;
-        if (remainder > clientWidth.value * scrollRation) {
-          scroll -= clientWidth.value;
-          index--;
-        }
-      }
-      setTimeout(() => {
-        List.value?.scrollTo({ left: scroll, behavior: 'smooth' });
-        initScrollLeft.value = scroll;
-        currentIndex.value = index;
-      }, 200);
-    });
-  }
-});
 </script>
 
 <style lang="scss" scoped>

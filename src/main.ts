@@ -9,7 +9,6 @@ import globalComponent from '@/components/global/index';
 import Plugin from '@/plugins/index';
 
 const app = createApp(App);
-
 app.use(createPinia());
 app.use(router);
 app.use(Plugin);

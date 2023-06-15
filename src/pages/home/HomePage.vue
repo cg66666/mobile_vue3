@@ -36,7 +36,6 @@ const showDelicacyList = ref<delicacyListType[]>([]);
 const switchShow = () => (showCover.value = !showCover.value);
 onMounted(() => {
   getHomeInitData().then((res) => {
-    console.log('res', res?.data);
     if (res) {
       const { firstList, firstListTitle, twiceList, searchDefultWordList, delicacyList } = res.data;
       firstLists.value = firstList;

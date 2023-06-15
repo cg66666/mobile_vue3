@@ -333,8 +333,8 @@
       "endTime": "2023-06-15 13:00:00",
       "goods": {
         "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
-        "name": "岩小石-韩式炸鸡",
-        "price": 19.8
+        "name": "这是倒计时标题",
+        "price": 119.8
       }
     },
     {
@@ -373,9 +373,11 @@
       }
     },
     {
-      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
-      "name": "双喜烤串",
-      "price": 19.8
+      "goods": {
+        "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+        "name": "双喜烤串",
+        "price": 19.8
+      }
     },
     {
       "goods": {

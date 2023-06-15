@@ -29,7 +29,7 @@
               :key="item.label"
               @click="() => goSearch(true)"
             >
-              <SvgIcon className="itemIcon" name="sousuo" color="#aaa" size="0.385rem" />{{
+              <SvgIcon class="itemIcon" name="sousuo" color="#aaa" size="0.385rem" />{{
                 item.label
               }}
             </div>

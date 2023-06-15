@@ -1,5 +1,5 @@
 <template>
-  <svg :class="`icon ${props.className}`" aria-hidden="true">
+  <svg class="icon" aria-hidden="true">
     <use :xlink:href="`#icon-${props.name}`" :fill="color"></use>
   </svg>
 </template>
@@ -8,7 +8,7 @@
 /**
  * 这里的size长度单位填写rem，如果使用px会丢失响应式
  */
-const props = defineProps<{ name: string; className?: string; color?: string; size?: string }>();
+const props = defineProps<{ name: string; color?: string; size?: string }>();
 </script>
 
 <style scoped>

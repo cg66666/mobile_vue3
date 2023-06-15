@@ -13,15 +13,15 @@
       </div>
       <img v-lazy="props.imgUrl" />
       <div class="goodInfo">
-        <div>岩小石-韩式炸鸡</div>
-        <div class="price">￥ 19.8</div>
+        <div>{{ props.title || '岩小石-韩式炸鸡' }}</div>
+        <div class="price">￥ {{ props.price || 19.8 }}</div>
       </div>
     </WhiteCard>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, onBeforeUnmount } from 'vue';
 let timer: number;
 type formatTimeType = {
   Day: string;
@@ -30,7 +30,13 @@ type formatTimeType = {
   Second: string;
 };
 const props = withDefaults(
-  defineProps<{ startTime?: string; endTime?: string; title?: string; imgUrl: string }>(),
+  defineProps<{
+    startTime?: string;
+    endTime?: string;
+    title?: string;
+    imgUrl?: string;
+    price?: number;
+  }>(),
   {
     startTime: '2023-06-06 13:00:00',
     endTime: '2023-06-08 20:30:00',
@@ -61,24 +67,33 @@ const setFormatTime = (time: number) => {
     Second: Second === String(time) ? '00' : Second
   };
 };
-watch(props, () => {
-  timer && cancelAnimationFrame(timer);
-  const setTime = () => {
-    const nowTime = new Date().getTime();
-    if (nowTime < startTimeStamp.value || nowTime > endTimeStamp.value) {
-      formatTime.value = {
-        Day: '00',
-        Hour: '00',
-        Minute: '00',
-        Second: '00'
-      };
-      cancelAnimationFrame(timer);
-    } else {
-      setFormatTime(endTimeStamp.value - nowTime);
-      requestAnimationFrame(setTime);
-    }
-  };
-  timer = requestAnimationFrame(setTime);
+watch(
+  props,
+  () => {
+    timer && cancelAnimationFrame(timer);
+    const setTime = () => {
+      const nowTime = new Date().getTime();
+      if (nowTime < startTimeStamp.value || nowTime > endTimeStamp.value) {
+        formatTime.value = {
+          Day: '00',
+          Hour: '00',
+          Minute: '00',
+          Second: '00'
+        };
+        cancelAnimationFrame(timer);
+      } else {
+        setFormatTime(endTimeStamp.value - nowTime);
+        requestAnimationFrame(setTime);
+      }
+    };
+    timer = requestAnimationFrame(setTime);
+  },
+  {
+    immediate: true
+  }
+);
+onBeforeUnmount(() => {
+  cancelAnimationFrame(timer);
 });
 </script>
 

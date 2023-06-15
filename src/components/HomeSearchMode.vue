@@ -2,7 +2,7 @@
   <div class="searchContainer">
     <div class="titleName">
       北京
-      <SvgIcon name="Down" size="0.33rem" className="downClass" />
+      <SvgIcon name="Down" size="0.33rem" class="downClass" />
     </div>
     <div class="searchItem">
       <div class="button">
@@ -18,7 +18,7 @@
         <div class="item" v-for="(item, index) in wordList" :key="index">{{ item }}</div>
       </div>
     </div>
-    <SvgIcon name="saoyisao" size="0.72rem" className="sweep" />
+    <SvgIcon name="saoyisao" size="0.72rem" class="sweep" />
   </div>
 </template>
 
@@ -62,7 +62,6 @@ watchEffect(() => {
   }
 });
 onUnmounted(() => {
-  console.log('un');
   clearInterval(timer);
 });
 </script>

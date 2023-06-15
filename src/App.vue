@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
-import { onMounted } from 'vue';
+import { onMounted, provide, computed, type ComputedRef } from 'vue';
+import { RouterView, useRouter } from 'vue-router';
 import { getInfo, getInfoPost } from '@/service/test';
 import BottomTabs from '@/pages/bottomTabs/BottomTabs.vue';
 import '@/assets/iconfont/iconfont.js';
+// 注入路由
+const router = useRouter();
+provide(
+  'currentRoutePath',
+  computed(() => router.currentRoute.value.path)
+);
 onMounted(() => {
   window.localStorage.removeItem('searchHistory');
   getInfo(111);
