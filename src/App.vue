@@ -1,9 +1,13 @@
+<template>
+  <RouterView />
+  <BottomTabs />
+</template>
+
 <script setup lang="ts">
-import { onMounted, provide, computed, type ComputedRef } from 'vue';
+import { onMounted, provide, computed } from 'vue';
 import { RouterView, useRouter } from 'vue-router';
 import { getInfo, getInfoPost } from '@/service/test';
 import BottomTabs from '@/pages/bottomTabs/BottomTabs.vue';
-import '@/assets/iconfont/iconfont.js';
 // 注入路由
 const router = useRouter();
 provide(
@@ -16,11 +20,6 @@ onMounted(() => {
   getInfoPost(111);
 });
 </script>
-
-<template>
-  <RouterView />
-  <BottomTabs />
-</template>
 
 <style scoped></style>
 <style lang="scss">

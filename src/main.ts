@@ -7,6 +7,7 @@ import 'vant/lib/index.css';
 import 'normalize.css';
 import globalComponent from '@/components/global/index';
 import Plugin from '@/plugins/index';
+import '@/assets/iconfont/iconfont.js';
 
 const app = createApp(App);
 app.use(createPinia());

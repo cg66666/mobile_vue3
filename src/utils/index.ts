@@ -50,3 +50,17 @@ export const getAssetsFile = (url: string) => {
 export const pxToRem = (px: number) => {
   return Number((px / 39).toFixed(3));
 };
+
+/**
+ * @name 简易深拷贝函数，仅限于基本数据类型，与引用数据类型
+ * @param val
+ * @returns
+ */
+export const cloneDeep = (val) => {
+  if (typeof val !== 'object' || val === null) return val;
+  const cloneVal = val instanceof Object ? {} : [];
+  for (const item in val) {
+    cloneVal[item] = cloneDeep(val[item]);
+  }
+  return cloneVal;
+};
