@@ -76,6 +76,8 @@
         class="loginButton"
         color="rgb(255, 209, 0)"
         :style="{ color: 'black', fontWeight: 'bolder' }"
+        :disabled="!canLogin"
+        @click="goLogin"
         >登录</Button
       >
       <!-- 这部分点了也没有 -->
@@ -87,10 +89,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch, reactive } from 'vue';
+import { ref, watch, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { Checkbox, Button } from 'vant';
+import { Checkbox, Button, showToast, showNotify } from 'vant';
 import { cloneDeep } from '@/utils';
+import { toLogin } from '@/service/login';
 type loginDataType = {
   loginData: {
     phone: string;
@@ -105,6 +108,11 @@ const state = reactive<loginDataType>({
   }
 });
 const checked = ref(false);
+const canLogin = computed(() => {
+  const { password, phone } = state.loginData;
+  if (phone.length === 13 && password) return true;
+  return false;
+});
 // 根据情景将光标置于末尾
 const setSelection = (e: any) => {
   let range = window.getSelection() as any; //创建range
@@ -114,10 +122,24 @@ const setSelection = (e: any) => {
   range?.selectAllChildren(e); //range 选择obj下所有子内容
   range?.collapseToEnd(); //光标移至最后
 };
+// 登录逻辑函数
+const goLogin = async () => {
+  if (!checked.value) return showToast('请先阅读并统一协议');
+  const userInfo = await toLogin({
+    phone: state.loginData.phone.replace(/[ ]/g, ''),
+    password: state.loginData.password
+  });
+  if (userInfo) {
+    window.localStorage.setItem('token', userInfo.data.token);
+    showNotify({ type: 'success', message: userInfo.msg });
+    router.go(-1);
+  }
+};
 watch(state, (nv) => {
   inputTarget.value.innerHTML = nv.loginData.phone || '';
   setSelection(inputTarget.value);
 });
+
 // 手写手机号输入框逻辑 contenteditable -----------------------------------------------------------
 // DOM元素
 const inputTarget = ref<any>();

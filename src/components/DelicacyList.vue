@@ -74,6 +74,8 @@ watch(props, (nv) => {
 .DelicacyContainer {
   display: flex;
   justify-content: space-between;
+  overflow: scroll;
+  height: 350px;
   .card {
     width: 183px;
     font-size: 16px;

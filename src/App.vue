@@ -1,6 +1,6 @@
 <template>
   <RouterView />
-  <BottomTabs />
+  <BottomTabs class="tabbar" />
 </template>
 
 <script setup lang="ts">
@@ -30,9 +30,17 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   color: rgb(54, 54, 54);
+  position: relative;
+  transition: 0.2s all ease;
+  left: 0;
   .plugIn-lazyload {
     width: 100px;
     height: 80px;
+  }
+  .tabbar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
   }
 }
 </style>

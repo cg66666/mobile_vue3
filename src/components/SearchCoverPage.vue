@@ -216,7 +216,7 @@ watchEffect(() => {
   position: absolute;
   background: white;
   top: 0;
-  z-index: 999;
+  // z-index: 10000;
   .headContainer {
     display: flex;
     background: #f5f5f5;

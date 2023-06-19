@@ -4,8 +4,13 @@
     @click="switchShow"
     class="fixLogic"
   ></HomeSearchMode>
-  <Transition name="coverPage" class="coverPage">
-    <SearchCoverPage defaultSearchWord="蜜雪冰城" v-if="showCover" @switchShow="switchShow" />
+  <Transition name="coverPage">
+    <SearchCoverPage
+      class="coverPage"
+      defaultSearchWord="蜜雪冰城"
+      v-if="showCover"
+      @switchShow="switchShow"
+    />
   </Transition>
   <div class="gradition" />
   <div class="homeBack">
@@ -23,7 +28,7 @@
 import HomeSearchMode from '@/components/HomeSearchMode.vue';
 import SearchCoverPage from '@/components/SearchCoverPage.vue';
 import DelicacyList from '@/components/DelicacyList.vue';
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted, inject, type TransitionProps } from 'vue';
 import { getHomeInitData, type firstListType, type delicacyListType } from '@/service/home';
 // 获取视口高度
 const viewportHeight = (inject('viewportHeight') as number) / 39 - 1.282 + 'rem';
@@ -60,7 +65,7 @@ onMounted(() => {
   height: 100%;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 10000;
 }
 .coverPage-enter-from,
 .coverPage-leave-to {

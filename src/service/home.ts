@@ -1,20 +1,13 @@
 import { get, post } from '@/ajax/index';
-import { type AxiosResponse } from 'axios';
 export interface wordList {
   type: number;
   label: string;
   resultCount: number;
 }
-export const getSearchWords = async (
-  word: string
-): Promise<AxiosResponse<wordList[]> | undefined> => {
+export const getSearchWords = async (word: string) => {
   const res = await get<wordList[]>('/home/search', { word });
   if (res) return res;
 };
-// export const getInfoPost = async (id: number): Promise<userInfo | undefined> => {
-//   const res = await post<userInfo>('/getInfo', { id });
-//   if (res) return res;
-// };
 export type firstListType = {
   img: string;
   label: string;
@@ -40,7 +33,7 @@ export interface initData {
   searchDefultWordList: string[];
   delicacyList: delicacyListType[];
 }
-export const getHomeInitData = async (): Promise<AxiosResponse<initData> | undefined> => {
+export const getHomeInitData = async () => {
   const res = await get<initData>('/home/getInfo');
   if (res) return res;
 };
