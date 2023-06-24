@@ -1,4 +1,12 @@
 <template>
+  <!-- <router-view #default="{ route, Component }">
+    <transition
+      :enter-active-class="`animate__animated ${route.meta?.transition?.enter}`"
+      :leave-active-class="`animate__animated ${route.meta?.transition?.leave}`"
+    >
+      <component :is="Component"></component>
+    </transition>
+  </router-view> -->
   <RouterView />
   <BottomTabs class="tabbar" />
 </template>
@@ -7,6 +15,7 @@
 import { onMounted, provide, computed } from 'vue';
 import { RouterView, useRouter } from 'vue-router';
 import { getInfo, getInfoPost } from '@/service/test';
+import 'animate.css';
 import BottomTabs from '@/pages/bottomTabs/BottomTabs.vue';
 // 注入路由
 const router = useRouter();

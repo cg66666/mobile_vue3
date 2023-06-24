@@ -20,3 +20,11 @@ export const getUserInfo = async () => {
   const res = await get<userInfo>('/login/getInfo');
   if (res) return res;
 };
+type verifyRes = {
+  ok: number;
+};
+export const verifyToken = async (token: number) => {
+  const res = await post<verifyRes>('/login/verifyToken', { token });
+  if (res) return res;
+  throw 'Error';
+};

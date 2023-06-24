@@ -1,25 +1,28 @@
 <template>
-  <HomeSearchMode
-    :defaultSearchWord="searchWordList"
-    @click="switchShow"
-    class="fixLogic"
-  ></HomeSearchMode>
-  <Transition name="coverPage">
-    <SearchCoverPage
-      class="coverPage"
-      defaultSearchWord="蜜雪冰城"
-      v-if="showCover"
-      @switchShow="switchShow"
-    />
-  </Transition>
-  <div class="gradition" />
-  <div class="homeBack">
-    <div class="homeBody">
-      <WhiteCard v-if="firstLists.length" :list-data="firstLists" :title="title" />
-      <WhiteCard v-if="twiceLists.length" :list-data="twiceLists" />
-      <div></div>
-      <!-- https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp -->
-      <DelicacyList :showDelicacyList="showDelicacyList" />
+  <div>
+    <HomeSearchMode
+      :defaultSearchWord="searchWordList"
+      @click="switchShow"
+      class="fixLogic"
+    ></HomeSearchMode>
+    <Transition name="coverPage">
+      <SearchCoverPage
+        class="coverPage"
+        defaultSearchWord="蜜雪冰城"
+        v-if="showCover"
+        @switchShow="switchShow"
+      />
+    </Transition>
+
+    <div class="homeBack">
+      <div class="gradition" />
+      <div class="homeBody">
+        <WhiteCard v-if="firstLists.length" :list-data="firstLists" :title="title" />
+        <WhiteCard v-if="twiceLists.length" :list-data="twiceLists" />
+        <div></div>
+        <!-- https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp -->
+        <DelicacyList :showDelicacyList="showDelicacyList" />
+      </div>
     </div>
   </div>
 </template>
@@ -87,20 +90,23 @@ onMounted(() => {
   margin-bottom: 50px;
   background: $backgroundColor;
   min-height: v-bind(viewportHeight);
+  height: 100%;
+  overflow: scroll;
+  .gradition {
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background: linear-gradient($brandColor 60%, $backgroundColor);
+    z-index: 1;
+  }
   .homeBody {
     z-index: 999;
-    position: relative;
+    position: absolute;
+    top: 0;
     width: 100%;
     padding: 0 8px;
     box-sizing: border-box;
   }
-}
-.gradition {
-  height: 200px;
-  width: 100%;
-  position: absolute;
-  top: 58px;
-  background: linear-gradient($brandColor 60%, $backgroundColor);
-  z-index: 1;
 }
 </style>

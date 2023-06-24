@@ -1,4 +1,5 @@
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios';
+import { useLogin } from '@/stores';
 import { showNotify } from 'vant';
 export interface IData<T> {
   code: number;
@@ -12,7 +13,8 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   (req) => {
-    req.headers['X-Token'] = window.localStorage.getItem('token');
+    const loginStore = useLogin();
+    req.headers['X-Token'] = loginStore.token;
     return req;
   },
   (error) => Promise.reject(error)

@@ -1,5 +1,5 @@
 import { computed, ref, onMounted, watch, type Ref } from 'vue';
-import { type dataType } from '@/components/WhiteCard.vue';
+import { type dataType } from '@/components/global/WhiteCard.vue';
 import { useScroll } from '@/hooks/useScroll';
 /**
  *
@@ -54,29 +54,33 @@ export function useScrollOrient(listData: dataType[], domRef: Ref<HTMLElement>) 
   );
   onMounted(() => {
     if (domRef.value) {
-      domRef.value.addEventListener('touchend', () => {
-        let index = currentIndex.value;
-        let scroll = initScrollLeft.value;
-        if (scrollLeft.value > initScrollLeft.value) {
-          const remainder = scrollLeft.value % clientWidth.value;
-          if (remainder > clientWidth.value * scrollRation) {
-            scroll += clientWidth.value;
-            index++;
+      domRef.value.addEventListener(
+        'touchend',
+        () => {
+          let index = currentIndex.value;
+          let scroll = initScrollLeft.value;
+          if (scrollLeft.value > initScrollLeft.value) {
+            const remainder = scrollLeft.value % clientWidth.value;
+            if (remainder > clientWidth.value * scrollRation) {
+              scroll += clientWidth.value;
+              index++;
+            }
+          } else {
+            const diffVal = initScrollLeft.value - scrollLeft.value;
+            const remainder = diffVal % clientWidth.value;
+            if (remainder > clientWidth.value * scrollRation) {
+              scroll -= clientWidth.value;
+              index--;
+            }
           }
-        } else {
-          const diffVal = initScrollLeft.value - scrollLeft.value;
-          const remainder = diffVal % clientWidth.value;
-          if (remainder > clientWidth.value * scrollRation) {
-            scroll -= clientWidth.value;
-            index--;
-          }
-        }
-        setTimeout(() => {
-          domRef.value?.scrollTo({ left: scroll, behavior: 'smooth' });
-          initScrollLeft.value = scroll;
-          currentIndex.value = index;
-        }, 200);
-      });
+          setTimeout(() => {
+            domRef.value?.scrollTo({ left: scroll, behavior: 'smooth' });
+            initScrollLeft.value = scroll;
+            currentIndex.value = index;
+          }, 200);
+        },
+        { passive: true }
+      );
     }
   });
   return scrollData;

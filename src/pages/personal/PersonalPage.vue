@@ -74,16 +74,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { getUserInfo } from '@/service/login';
 import { getAssetsFile } from '@/utils';
 import { Button } from 'vant';
+import { useLogin } from '@/stores';
 const app = ref('#app');
 const router = useRouter();
+const loginStore = useLogin();
 const accountName = ref('');
 const appContainer = document.getElementById('app');
-// const settingPage = ref<HTMLElement>();
 const moveApp = () => {
   if (appContainer) {
     appContainer.style.left = '-100%';
@@ -95,19 +95,16 @@ const appBack = () => {
   }
 };
 const logOut = () => {
-  window.localStorage.removeItem('token');
-  getInfo();
+  loginStore.clearLocalUserInfo();
   appBack();
 };
-const getInfo = async () => {
-  const res = await getUserInfo();
-  if (res) {
-    accountName.value = res.data.name;
-  }
-};
-onMounted(async () => {
-  getInfo();
-});
+watch(
+  () => loginStore.name,
+  (nv) => {
+    accountName.value = nv;
+  },
+  { immediate: true }
+);
 </script>
 
 <style lang="scss" scoped>

@@ -20,6 +20,7 @@ export type delicacyListType = {
   startTime?: string;
   endTime?: string;
   goods: {
+    id: number;
     imgUrl: string;
     name: string;
     price: number;

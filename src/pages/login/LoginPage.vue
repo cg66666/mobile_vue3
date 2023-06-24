@@ -94,6 +94,7 @@ import { useRouter } from 'vue-router';
 import { Checkbox, Button, showToast, showNotify } from 'vant';
 import { cloneDeep } from '@/utils';
 import { toLogin } from '@/service/login';
+import { useLogin } from '@/stores';
 type loginDataType = {
   loginData: {
     phone: string;
@@ -101,6 +102,7 @@ type loginDataType = {
   };
 };
 const router = useRouter();
+const loginStore = useLogin();
 const state = reactive<loginDataType>({
   loginData: {
     phone: '',
@@ -116,12 +118,13 @@ const canLogin = computed(() => {
 // 根据情景将光标置于末尾
 const setSelection = (e: any) => {
   let range = window.getSelection() as any; //创建range
-  console.log('range222', range);
   // 根据id，判断当前DOM的光标是否需要更新
   if (range.focusNode.id === 'PasswordInput') return;
   range?.selectAllChildren(e); //range 选择obj下所有子内容
   range?.collapseToEnd(); //光标移至最后
 };
+console.log(222, router.currentRoute.value.query);
+
 // 登录逻辑函数
 const goLogin = async () => {
   if (!checked.value) return showToast('请先阅读并统一协议');
@@ -130,9 +133,16 @@ const goLogin = async () => {
     password: state.loginData.password
   });
   if (userInfo) {
-    window.localStorage.setItem('token', userInfo.data.token);
+    loginStore.name = userInfo.data.name;
+    loginStore.setLocalUserInfo(userInfo.data.token, userInfo.data.name);
     showNotify({ type: 'success', message: userInfo.msg });
-    router.go(-1);
+    const { return_url } = router.currentRoute.value.query;
+    if (return_url) {
+      router.push(return_url as string);
+      return;
+    } else {
+      router.go(-1);
+    }
   }
 };
 watch(state, (nv) => {

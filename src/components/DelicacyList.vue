@@ -10,9 +10,10 @@
           :imgUrl="item.goods.imgUrl"
           :title="item.goods.name"
           :price="item.goods.price"
+          @click="goDetail(item.goods.id)"
         />
         <WhiteCard v-else class="card">
-          <div>
+          <div @click="goDetail(item.goods.id)">
             <img v-lazy="item.goods.imgUrl" />
             <div>{{ item.goods.name }}</div>
             <div class="price">￥ {{ item.goods.price }}</div>
@@ -23,7 +24,7 @@
     <div>
       <template v-for="(item, index) in state.rightList" :key="index">
         <WhiteCard class="card">
-          <div>
+          <div @click="goDetail(item.goods.id)">
             <img v-lazy="item.goods.imgUrl" />
             <div>{{ item.goods.name }}</div>
             <div class="price">￥ {{ item.goods.price }}</div>
@@ -36,8 +37,10 @@
 
 <script setup lang="ts">
 import { onMounted, watchEffect, watch, ref, onUpdated, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 import Countdown from '@/components/Countdown.vue';
 import { type delicacyListType } from '@/service/home';
+const router = useRouter();
 const props = defineProps<{ showDelicacyList: delicacyListType[] }>();
 const state = reactive<{ leftList: delicacyListType[]; rightList: delicacyListType[] }>({
   leftList: [],
@@ -48,6 +51,12 @@ const countdownTime = ref({
   endTime: '2023-06-08 20:30:00',
   imgUrl: ''
 });
+const goDetail = (id: number) => {
+  router.push({
+    name: 'productDetails',
+    query: { id }
+  });
+};
 watch(props, (nv) => {
   if (nv.showDelicacyList.length) {
     countdownTime.value = {
@@ -74,8 +83,8 @@ watch(props, (nv) => {
 .DelicacyContainer {
   display: flex;
   justify-content: space-between;
-  overflow: scroll;
-  height: 350px;
+  // overflow: scroll;
+  // height: 350px;
   .card {
     width: 183px;
     font-size: 16px;

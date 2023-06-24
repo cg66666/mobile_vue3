@@ -2,7 +2,6 @@
   <div class="container" :style="props.style">
     <div v-if="props.title" class="title">{{ props.title }}</div>
     <slot v-if="slots"></slot>
-    <!-- <template v-if="props.listData?.length"> -->
     <div v-if="props.listData?.length" class="listContainer" ref="List">
       <div class="pageConmtainer" v-for="(item, index) in scrollData" :key="index">
         <div class="listItem" v-for="(item2, index2) in item" :key="index2">
@@ -15,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { useSlots, computed, ref, type Ref, watch, type CSSProperties } from 'vue';
+import { useSlots, computed, ref, type Ref, type CSSProperties, onMounted } from 'vue';
 import { useScrollOrient } from '@/hooks/useScrollOrient';
-type dataType = {
+export type dataType = {
   label: string;
   img: string;
 };
@@ -27,16 +26,12 @@ const props = defineProps<{
   productData?: dataType;
   style?: CSSProperties;
 }>();
+const emit = defineEmits<{
+  click: [id: number];
+}>();
 const slots = computed(() => !!useSlots().default);
 const List = ref<HTMLElement>();
 const scrollData = useScrollOrient(props.listData || [], List as Ref<HTMLElement>);
-watch(
-  props,
-  (nv) => {
-    console.log('props', props.style);
-  },
-  { immediate: true, deep: true }
-);
 </script>
 
 <style lang="scss" scoped>

@@ -5,6 +5,7 @@ import router from './router';
 import 'amfe-flexible';
 import 'vant/lib/index.css';
 import 'normalize.css';
+import 'animate.css';
 import globalComponent from '@/components/global/index';
 import Plugin from '@/plugins/index';
 import '@/assets/iconfont/iconfont.js';
