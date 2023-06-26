@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watchEffect, watch, ref, onUpdated, reactive } from 'vue';
+import { watch, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import Countdown from '@/components/Countdown.vue';
 import { type delicacyListType } from '@/service/home';

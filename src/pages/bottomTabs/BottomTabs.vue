@@ -1,6 +1,6 @@
 <template>
   <Tabbar
-    v-show="tabbarList.includes(active)"
+    v-show="Object.values(tabbarEnum).includes(active)"
     v-model="active"
     class="tabbarBody"
     @change="(v) => router.push({ name: v })"
@@ -22,10 +22,9 @@ enum tabbarEnum {
   ORDER = 'order',
   PERSONAL = 'personal'
 }
-const tabbarList: string[] = [tabbarEnum.HOME, tabbarEnum.ORDER, tabbarEnum.PERSONAL];
-const active = ref(tabbarEnum.HOME);
 const router = useRouter();
 const currentRoutePath = inject<ComputedRef>('currentRoutePath');
+const active = ref(tabbarEnum.HOME);
 watch(
   () => currentRoutePath,
   (nv) => {

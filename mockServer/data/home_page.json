@@ -329,8 +329,8 @@
   "searchDefultWordList": ["南锣鼓巷美食", "方砖厂69号炸酱面", "茶汤李京味餐厅", "麦当劳&麦咖啡"],
   "delicacyList": [
     {
-      "startTime": "2023-06-10 13:00:00",
-      "endTime": "2023-06-15 13:00:00",
+      "startTime": "2023-06-24 13:00:00",
+      "endTime": "2023-06-27 13:00:00",
       "goods": {
         "id": 1234,
         "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
@@ -499,9 +499,10 @@
       }
     }
   ],
+
   "countdown": {
-    "startTime": "2023-06-10 13:00:00",
-    "endTime": "2023-06-15 13:00:00",
+    "startTime": "2023-06-24 13:00:00",
+    "endTime": "2023-06-27 13:00:00",
     "goods": {
       "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
       "name": "腊鸡腿菜饭 + 卤香干 + 冰红茶",
@@ -522,7 +523,6 @@
       "btn": "去查看"
     }
   ],
-
   "activities": [
     "/imgs/index_page/activity/01.png",
     "/imgs/index_page/activity/02.png",

@@ -56,9 +56,9 @@ export const pxToRem = (px: number) => {
  * @param val
  * @returns
  */
-export const cloneDeep = (val) => {
+export const cloneDeep = <T>(val: T): T => {
   if (typeof val !== 'object' || val === null) return val;
-  const cloneVal = val instanceof Object ? {} : [];
+  const cloneVal: any = val instanceof Object ? {} : [];
   for (const item in val) {
     cloneVal[item] = cloneDeep(val[item]);
   }

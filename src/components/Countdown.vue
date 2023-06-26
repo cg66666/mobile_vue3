@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, onBeforeUnmount } from 'vue';
-let timer: number;
+let timer: number = 0;
 type formatTimeType = {
   Day: string;
   Hour: string;
@@ -72,21 +72,18 @@ watch(
   () => {
     timer && cancelAnimationFrame(timer);
     const setTime = () => {
-      const nowTime = new Date().getTime();
-      if (nowTime < startTimeStamp.value || nowTime > endTimeStamp.value) {
-        formatTime.value = {
+      const nowTime = Date.now();
+      if (nowTime < startTimeStamp.value || nowTime > endTimeStamp.value)
+        return (formatTime.value = {
           Day: '00',
           Hour: '00',
           Minute: '00',
           Second: '00'
-        };
-        cancelAnimationFrame(timer);
-      } else {
-        setFormatTime(endTimeStamp.value - nowTime);
-        requestAnimationFrame(setTime);
-      }
+        });
+      setFormatTime(endTimeStamp.value - nowTime);
+      timer = requestAnimationFrame(setTime);
     };
-    timer = requestAnimationFrame(setTime);
+    requestAnimationFrame(setTime);
   },
   {
     immediate: true

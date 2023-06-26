@@ -13,7 +13,6 @@
         @switchShow="switchShow"
       />
     </Transition>
-
     <div class="homeBack">
       <div class="gradition" />
       <div class="homeBody">
