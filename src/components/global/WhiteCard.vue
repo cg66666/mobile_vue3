@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { useSlots, computed, ref, type Ref, type CSSProperties, onMounted } from 'vue';
+import { useSlots, computed, ref, type Ref, type CSSProperties } from 'vue';
 import { useScrollOrient } from '@/hooks/useScrollOrient';
 export type dataType = {
   label: string;
@@ -25,9 +25,6 @@ const props = defineProps<{
   listData?: dataType[];
   productData?: dataType;
   style?: CSSProperties;
-}>();
-const emit = defineEmits<{
-  click: [id: number];
 }>();
 const slots = computed(() => !!useSlots().default);
 const List = ref<HTMLElement>();

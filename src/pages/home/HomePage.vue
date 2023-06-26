@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="containerRef">
     <HomeSearchMode
       :defaultSearchWord="searchWordList"
       @click="switchShow"
@@ -13,14 +13,12 @@
         @switchShow="switchShow"
       />
     </Transition>
-    <div class="homeBack">
+    <div class="homeBack" ref="homeBackRef">
       <div class="gradition" />
       <div class="homeBody">
         <WhiteCard v-if="firstLists.length" :list-data="firstLists" :title="title" />
         <WhiteCard v-if="twiceLists.length" :list-data="twiceLists" />
-        <div></div>
-        <!-- https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp -->
-        <DelicacyList :showDelicacyList="showDelicacyList" />
+        <DelicacyList ref="DelicacyListRef" :showDelicacyList="showDelicacyList" />
       </div>
     </div>
   </div>
@@ -30,10 +28,18 @@
 import HomeSearchMode from '@/components/HomeSearchMode.vue';
 import SearchCoverPage from '@/components/SearchCoverPage.vue';
 import DelicacyList from '@/components/DelicacyList.vue';
-import { ref, onMounted, inject, type TransitionProps } from 'vue';
+import { ref, onMounted, inject, watch, type Ref } from 'vue';
 import { getHomeInitData, type firstListType, type delicacyListType } from '@/service/home';
+import { useScroll } from '@/hooks';
+// 滚动触底加载逻辑
+const homeBackRef = ref<HTMLElement>();
+const DelicacyListRef = ref();
+const { isReachBottom } = useScroll(homeBackRef as Ref<HTMLElement>);
+watch(isReachBottom, (nv) => {
+  if (nv) DelicacyListRef.value.addList();
+});
 // 获取视口高度
-const viewportHeight = (inject('viewportHeight') as number) / 39 - 1.282 + 'rem';
+const viewportHeight = (inject('viewportHeight') as number) / 39 - 2.682 + 'rem';
 const showCover = ref(false);
 const firstLists = ref<firstListType[]>([]);
 const title = ref('');
@@ -89,7 +95,6 @@ onMounted(() => {
   margin-bottom: 50px;
   background: $backgroundColor;
   min-height: v-bind(viewportHeight);
-  height: 100%;
   overflow: scroll;
   .gradition {
     height: 200px;

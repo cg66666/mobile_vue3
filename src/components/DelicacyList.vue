@@ -40,6 +40,7 @@ import { watch, ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import Countdown from '@/components/Countdown.vue';
 import { type delicacyListType } from '@/service/home';
+import list from '@/assets/data/addList.json';
 const router = useRouter();
 const props = defineProps<{ showDelicacyList: delicacyListType[] }>();
 const state = reactive<{ leftList: delicacyListType[]; rightList: delicacyListType[] }>({
@@ -76,6 +77,13 @@ watch(props, (nv) => {
     state.rightList = rightList;
     state.leftList = leftList;
   }
+});
+const addList = () => {
+  state.leftList.push(...list);
+  state.rightList.push(...list);
+};
+defineExpose({
+  addList
 });
 </script>
 

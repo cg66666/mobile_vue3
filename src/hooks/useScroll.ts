@@ -30,7 +30,9 @@ export function useScroll(elRef: Ref<HTMLElement>) {
     } else {
       setVal(el as HTMLElement);
     }
-    if (currentClientHeight.value + currentScrollTop.value >= currentScrollHeight.value) {
+    isReachBottom.value = false;
+    // 这里存在1点误差
+    if (currentClientHeight.value + currentScrollTop.value >= currentScrollHeight.value - 1) {
       isReachBottom.value = true;
     }
   }, 50);
@@ -41,7 +43,6 @@ export function useScroll(elRef: Ref<HTMLElement>) {
     } else {
       setVal(document.documentElement);
     }
-
     el.addEventListener('scroll', scrollListenerHandler as unknown as EventListener);
   });
   onUnmounted(() => {

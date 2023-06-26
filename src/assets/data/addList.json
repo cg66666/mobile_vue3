@@ -1,0 +1,162 @@
+[
+  {
+    "goods": {
+      "id": 1235,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "特色自助大骨头",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1236,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "暴走手撕烤鸭",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1237,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "小吃小喝东北家常菜",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1238,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "鲜牛记潮汕牛肉火锅",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1239,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "盛世火锅鸡",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1240,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "双喜烤串",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1241,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "好伦哥自助",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1242,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "腊鸡腿菜饭 + 卤香干 + 冰红茶",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1243,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "东北炸王",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1244,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "东北自助骨头锅",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1245,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "特色自助大骨头",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1246,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "暴走手撕烤鸭",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1464,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "小吃小喝东北家常菜",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1563,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "鲜牛记潮汕牛肉火锅",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1865,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "盛世火锅鸡",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1865,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "双喜烤串",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1333,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "好伦哥自助",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1787,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "腊鸡腿菜饭 + 卤香干 + 冰红茶",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1939,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "东北炸王",
+      "price": 19.8
+    }
+  },
+  {
+    "goods": {
+      "id": 1818,
+      "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",
+      "name": "东北自助骨头锅",
+      "price": 19.8
+    }
+  }
+]
