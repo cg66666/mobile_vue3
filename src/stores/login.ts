@@ -14,8 +14,12 @@ export const useLogin = defineStore('login', {
       const res = await getUserInfo();
       if (res?.data?.name) {
         this.name = res.data.name;
+        // return Promise.resolve();
       } else {
+        // console.log(222);
+
         this.clearLocalUserInfo();
+        // return Promise.reject();
       }
     },
     clearLocalUserInfo() {

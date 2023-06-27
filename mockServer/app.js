@@ -3,7 +3,9 @@ const Koa = require('koa');
 const koaBody = require('koa-body').default;
 const router = require('./controller/server');
 const handleResStatus = require('./middleware/handleResStatus');
+const ws = require('./ws/index');
 const app = new Koa();
+ws();
 app.use(koaBody());
 app.use(router.routes()); // 添加路由中间件
 app.use(router.allowedMethods()); // 对请求进行一些限制处理

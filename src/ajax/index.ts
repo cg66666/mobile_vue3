@@ -30,14 +30,13 @@ instance.interceptors.response.use(
   },
   (error: AxiosError) => {
     console.log(error);
-
     showNotify('请求失败，请检查网络');
     return Promise.reject(error);
   }
 );
 
 /**
- *  Post请求
+ *  Get请求
  * @param url 请求地址
  * @param data 请求参数
  * @param config  请求配置

@@ -1,7 +1,7 @@
 const koaRouter = require('koa-router');
 const router_test = new koaRouter();
 router_test.get('/login', async (ctx, next) => {
-  console.log('login++', ctx.query);
+  // console.log('login++', ctx.query);
   ctx.body = {
     code: 0,
     msg: `这是'test/login'`
@@ -23,7 +23,7 @@ router_test.get('/getInfo', async (ctx, next) => {
   await next();
 });
 router_test.post('/getInfo', async (ctx, next) => {
-  console.log('getInfo++', ctx.request.body);
+  // console.log('getInfo++', ctx.request.body);
   ctx.body = {
     code: 0,
     msg: `这是 get 'test/getMsg'`

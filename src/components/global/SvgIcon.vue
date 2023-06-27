@@ -16,7 +16,6 @@ const props = defineProps<{ name: string; color?: string; size?: string }>();
   width: v-bind("props.size || '20px'");
   height: v-bind("props.size || '20px'");
   vertical-align: -0.15em;
-  fill: currentColor;
   overflow: hidden;
 }
 </style>

@@ -7,7 +7,7 @@ const handleAuth = require('../../middleware/handleAuth');
 const expiresIn = 60 * 60;
 // const expiresIn = 60;
 router_login.post('/', async (ctx, next) => {
-  console.log('secret', secret);
+  // console.log('secret', secret);
   const { loginInfo } = ctx.request.body;
   const targetAccount = userInfo.find((item) => {
     if (item.phone == loginInfo.phone && item.password == loginInfo.password) return true;

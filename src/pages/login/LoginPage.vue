@@ -123,7 +123,7 @@ const setSelection = (e: any) => {
   range?.selectAllChildren(e); //range 选择obj下所有子内容
   range?.collapseToEnd(); //光标移至最后
 };
-console.log(222, router.currentRoute.value.query);
+// console.log(222, router.currentRoute.value.query);
 
 // 登录逻辑函数
 const goLogin = async () => {

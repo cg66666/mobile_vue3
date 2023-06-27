@@ -2,7 +2,7 @@
   <div class="back">
     <div class="setting">
       <span @click="moveApp">设置</span>
-      <span>客服</span>
+      <span @click="router.push({ name: 'service' })">客服</span>
     </div>
     <div class="goLogin" @click="() => !accountName && router.push({ name: 'login' })">
       <img :src="getAssetsFile('shop_page/comment/avatar.png')" alt="" />
@@ -74,7 +74,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { getAssetsFile } from '@/utils';
 import { Button } from 'vant';

@@ -75,12 +75,20 @@ const router = createRouter({
       meta: {
         title: '登录'
       }
+    },
+    {
+      name: 'service',
+      path: '/service',
+      component: () => import('@/pages/service/ServicePage.vue'),
+      meta: {
+        title: '客服'
+      }
     }
   ]
 });
 
 // 需要登录校验的路由name
-const verifyRouteName = ['productDetails'];
+const verifyRouteName = ['productDetails', 'service'];
 // 登录状态无法进入的登录页
 const loginRouteName = ['login'];
 
@@ -88,15 +96,10 @@ const loginRouteName = ['login'];
 router.beforeEach((to, from, next) => {
   const loginStore = useLogin();
   loginStore.getUserInfo().finally(() => {
+    document.title = to.meta.title;
     if (verifyRouteName.includes(to.name as string)) {
       if (loginStore.token) {
-        verifyToken(loginStore.token)
-          .then(() => {
-            next();
-          })
-          .catch(() => {
-            next('/login');
-          });
+        next();
       } else {
         // 保证退回原页面
         next(`/login?return_url=${to.fullPath}`);
@@ -104,10 +107,12 @@ router.beforeEach((to, from, next) => {
     } else if (loginRouteName.includes(to.name as string)) {
       if (loginStore.token) {
         next('/home');
+      } else {
+        next();
       }
+    } else {
+      next();
     }
-    document.title = to.meta.title;
-    next();
   });
 });
 
