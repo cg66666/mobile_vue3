@@ -329,8 +329,8 @@
   "searchDefultWordList": ["南锣鼓巷美食", "方砖厂69号炸酱面", "茶汤李京味餐厅", "麦当劳&麦咖啡"],
   "delicacyList": [
     {
-      "startTime": "2023-06-24 13:00:00",
-      "endTime": "2023-06-27 13:00:00",
+      "startTime": "2023-06-26 13:00:00",
+      "endTime": "2023-06-30 13:00:00",
       "goods": {
         "id": 1234,
         "imgUrl": "https://img.zcool.cn/community/01f5845b5ad6b1a801206a353a53a9.jpg?x-oss-process=image/auto-orient,0/resize,w_420/format,webp",

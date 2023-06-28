@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="title">案例（单位秒），与下方结算后的倒计时同步</div>
-    {{ a }}
+    {{ showTime }}
     <button @click="startCountdown()">开始</button>
     <button @click="pauseCountdown()">暂停</button>
     <button @click="cancelCountdown()">取消</button>
@@ -48,6 +48,7 @@ const minute = computed(() =>
 const second = computed(() =>
   String(Math.floor((currentDiffTime.value % (1000 * 60)) / 1000)).padStart(2, '0')
 );
+// 模拟轮询请求
 const testRequest = () => {
   return new Promise<void>((resolve) => {
     const delay = Math.round(Math.random() * (1000 - 200) + 200);
@@ -75,10 +76,13 @@ const cancelDialog = () => {
   cancelPooling();
   qrCodeUrl!.value!.innerHTML = '';
 };
+// 假定的付款倒计时时间
+const testTimeStamp = ref(3600000);
 // 倒计时hooks，可直接封装使用
-const { startCountdown, cancelCountdown, pauseCountdown, currentDiffTime } = useCountdown(3600000);
+const { startCountdown, cancelCountdown, pauseCountdown, currentDiffTime } =
+  useCountdown(testTimeStamp);
 startCountdown();
-const a = computed(() => (currentDiffTime.value / 1000).toFixed(0));
+const showTime = computed(() => (currentDiffTime.value / 1000).toFixed(0));
 </script>
 <style lang="scss">
 .vant_Dialog {

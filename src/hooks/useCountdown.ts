@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, computed, watch, type Ref } from 'vue';
 enum statusEnum {
   START,
   PAUSE,
@@ -7,18 +7,16 @@ enum statusEnum {
 /**
  *
  * @param diffTime 需要计时的剩余时间（毫秒）
- * @returns
+ * @returns 开始函数、暂停函数、重新计算函数、计算剩余时间（毫秒）
  */
-export const useCountdown = (diffTime: number) => {
+export const useCountdown = (diffTime: Ref<number>) => {
   let timer: number;
-  const currentDiffTime = ref(diffTime);
-  let middleDiffTime = diffTime;
   let startTime: number;
   let status = statusEnum.CANCEL;
+  const currentDiffTime = ref<number>(diffTime.value);
+  let middleDiffTime: number = diffTime.value;
   const startCountdown = () => {
     if (status === statusEnum.START) return;
-    console.log(111);
-
     status = statusEnum.START;
     startTime = Date.now();
     const doCountdown = () => {
@@ -30,21 +28,24 @@ export const useCountdown = (diffTime: number) => {
   };
   const cancelCountdown = () => {
     if (status === statusEnum.CANCEL) return;
-    console.log(222);
-
-    status = statusEnum.CANCEL;
-    currentDiffTime.value = diffTime;
-    middleDiffTime = diffTime;
-    cancelAnimationFrame(timer);
+    initCountDown(diffTime.value);
   };
   const pauseCountdown = () => {
     if (status === statusEnum.PAUSE) return;
-    console.log(333);
-
+    cancelAnimationFrame(timer);
     status = statusEnum.PAUSE;
     middleDiffTime = currentDiffTime.value;
-    cancelAnimationFrame(timer);
   };
+  const initCountDown = (val: number) => {
+    cancelAnimationFrame(timer);
+    status = statusEnum.CANCEL;
+    currentDiffTime.value = val;
+    middleDiffTime = val;
+  };
+  watch(diffTime, (nv) => {
+    initCountDown(nv);
+    startCountdown();
+  });
   return {
     startCountdown,
     cancelCountdown,

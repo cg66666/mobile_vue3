@@ -1,7 +1,6 @@
 <template>
   <div class="FlashSaleContainer">
     <WhiteCard title="特价团购">
-      <!-- <div>特价团购</div> -->
       <div class="timeContainer">
         <div>天：{{ formatTime.Day }}</div>
         &nbsp; &nbsp; &nbsp;
@@ -22,6 +21,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, onBeforeUnmount } from 'vue';
+import { useCountdown } from '@/hooks';
 let timer: number = 0;
 type formatTimeType = {
   Day: string;
@@ -43,18 +43,18 @@ const props = withDefaults(
     title: ''
   }
 );
+
 const formatTime = ref<formatTimeType>({
   Day: '00',
   Hour: '00',
   Minute: '00',
   Second: '00'
 });
-const startTimeStamp = computed(() => {
-  return new Date(props.startTime).getTime();
-});
-const endTimeStamp = computed(() => {
-  return new Date(props.endTime).getTime();
-});
+const diffTime = computed(
+  () => new Date(props.endTime).getTime() - new Date(props.startTime).getTime()
+);
+const { startCountdown, currentDiffTime } = useCountdown(diffTime);
+startCountdown();
 const setFormatTime = (time: number) => {
   const Day = String(Math.floor(time / 60 / 60 / 1000 / 24)).padStart(2, '0');
   const Hour = String(Math.floor((time % (1000 * 60 * 60 * 24)) / 60 / 60 / 1000)).padStart(2, '0');
@@ -67,28 +67,9 @@ const setFormatTime = (time: number) => {
     Second: Second === String(time) ? '00' : Second
   };
 };
-watch(
-  props,
-  () => {
-    timer && cancelAnimationFrame(timer);
-    const setTime = () => {
-      const nowTime = Date.now();
-      if (nowTime < startTimeStamp.value || nowTime > endTimeStamp.value)
-        return (formatTime.value = {
-          Day: '00',
-          Hour: '00',
-          Minute: '00',
-          Second: '00'
-        });
-      setFormatTime(endTimeStamp.value - nowTime);
-      timer = requestAnimationFrame(setTime);
-    };
-    requestAnimationFrame(setTime);
-  },
-  {
-    immediate: true
-  }
-);
+watch(currentDiffTime, (nv) => {
+  setFormatTime(nv);
+});
 onBeforeUnmount(() => {
   cancelAnimationFrame(timer);
 });

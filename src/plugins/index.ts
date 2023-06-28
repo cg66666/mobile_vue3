@@ -1,4 +1,4 @@
-import type { App, DirectiveBinding } from 'vue';
+import type { App } from 'vue';
 import LazyLoad from './Lazyload';
 import GetViewportHeight from './GetVirwportHeight';
 
