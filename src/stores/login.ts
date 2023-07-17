@@ -4,7 +4,7 @@ import { getUserInfo } from '@/service/login';
 export const useLogin = defineStore('login', {
   state: () => ({
     token: null,
-    name: ''
+    name: '',
   }),
   actions: {
     async getUserInfo() {
@@ -14,12 +14,8 @@ export const useLogin = defineStore('login', {
       const res = await getUserInfo();
       if (res?.data?.name) {
         this.name = res.data.name;
-        // return Promise.resolve();
       } else {
-        // console.log(222);
-
         this.clearLocalUserInfo();
-        // return Promise.reject();
       }
     },
     clearLocalUserInfo() {
@@ -31,6 +27,6 @@ export const useLogin = defineStore('login', {
       window.localStorage.setItem('userInfo', JSON.stringify({ token, name }));
       this.token = token;
       this.name = name;
-    }
-  }
+    },
+  },
 });

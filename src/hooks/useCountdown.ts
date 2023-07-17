@@ -1,8 +1,8 @@
-import { ref, computed, watch, type Ref } from 'vue';
+import { ref, watch, type Ref } from 'vue';
 enum statusEnum {
   START,
   PAUSE,
-  CANCEL
+  CANCEL,
 }
 /**
  *
@@ -50,6 +50,6 @@ export const useCountdown = (diffTime: Ref<number>) => {
     startCountdown,
     cancelCountdown,
     pauseCountdown,
-    currentDiffTime
+    currentDiffTime,
   };
 };

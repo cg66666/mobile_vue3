@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-    <Transition name="coverPage" class="coverPage">
+    <Transition name="coverPage">
       <div class="container" v-if="showResultPage">
         <div class="headContainer">
           <SvgIcon
@@ -82,8 +82,8 @@
               }
             "
           />
-          <br />搜索结果页
         </div>
+        搜索结果页
       </div>
     </Transition>
   </div>
@@ -97,7 +97,7 @@ import { debounce } from '@/utils/index';
 enum statusText {
   NONE = '未开始/已完成', // 未开始状态
   DOING = '搜索中', // 搜索中状态
-  EMPTY = '暂无内容' // 暂无结果状态
+  EMPTY = '暂无内容', // 暂无结果状态
 }
 
 const props = defineProps<{
@@ -160,7 +160,6 @@ const handleArray = computed(() => {
     const string = item.replace(/[\u0391-\uFFE5]/g, 'aa');
     length += string.length;
     if (numIdx > 0) length += 5;
-    console.log('length', length, string);
     if (isSecondRow && length > 41) {
       needWrap = true;
       index = numIdx;
@@ -201,11 +200,6 @@ watchEffect(() => {
     return;
   }
   getWordList();
-});
-watchEffect(() => {
-  console.log('333searchWordList', searchWordList.value);
-  console.log('333searchStatus', searchStatus.value);
-  console.log('333handleArray', handleArray.value);
 });
 </script>
 

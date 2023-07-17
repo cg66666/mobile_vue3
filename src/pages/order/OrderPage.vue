@@ -69,7 +69,7 @@ const waitPay = async () => {
     height: 150,
     colorDark: '#000000',
     colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.H // 容错级别
+    correctLevel: QRCode.CorrectLevel.H, // 容错级别
   });
 };
 const cancelDialog = () => {

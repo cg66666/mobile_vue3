@@ -11,18 +11,25 @@ export function usePolling(fn: () => Promise<any>, delay: number) {
   const doPolling = () => {
     !isCanceled && cancelPooling();
     isCanceled = false;
+    let isPolling = false;
     const startTime = Date.now();
     let time = 1;
-    const a = () => {
+    const polling = () => {
       const nowTime = Date.now();
-      if (startTime + delay * time > nowTime) return (timer = requestAnimationFrame(a));
-      time++;
-      fn().finally(() => {
-        if (isCanceled) return;
-        timer = requestAnimationFrame(a);
-      });
+      if (isPolling) return;
+      if (nowTime > startTime + delay * time) {
+        time++;
+        isPolling = true;
+        fn().finally(() => {
+          if (isCanceled) return;
+          isPolling = false;
+          timer = requestAnimationFrame(polling);
+        });
+      } else {
+        timer = requestAnimationFrame(polling);
+      }
     };
-    requestAnimationFrame(a);
+    requestAnimationFrame(polling);
   };
   const cancelPooling = () => {
     isCanceled = true;

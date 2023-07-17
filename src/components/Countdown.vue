@@ -40,7 +40,7 @@ const props = withDefaults(
   {
     startTime: '2023-06-06 13:00:00',
     endTime: '2023-06-08 20:30:00',
-    title: ''
+    title: '',
   }
 );
 
@@ -48,7 +48,7 @@ const formatTime = ref<formatTimeType>({
   Day: '00',
   Hour: '00',
   Minute: '00',
-  Second: '00'
+  Second: '00',
 });
 const diffTime = computed(
   () => new Date(props.endTime).getTime() - new Date(props.startTime).getTime()
@@ -64,7 +64,7 @@ const setFormatTime = (time: number) => {
     Day: Day === String(time) ? '00' : Day,
     Hour: Hour === String(time) ? '00' : Hour,
     Minute: Minute === String(time) ? '00' : Minute,
-    Second: Second === String(time) ? '00' : Second
+    Second: Second === String(time) ? '00' : Second,
   };
 };
 watch(currentDiffTime, (nv) => {

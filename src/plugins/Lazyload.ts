@@ -16,7 +16,7 @@ export default (app: App) => {
     },
     {
       // 交叉视图的 100px，才开始派发事件
-      rootMargin: '0px 0px -100px 0px'
+      rootMargin: '0px 0px -100px 0px',
     }
   );
   return app.directive('lazy', (el: any, binding: DirectiveBinding) => {
