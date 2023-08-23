@@ -6,7 +6,7 @@ import { throttle } from '@/utils/index';
  * @param option 横向滚动范围限制(不包括window)
  * @returns 返回的为ref格式
  */
-export function useScroll(elRef: Ref<HTMLElement>) {
+export function useScroll(elRef: Ref<HTMLElement>, isThrottel: boolean = true) {
   let el: HTMLElement | Window = window;
   const isReachBottom = ref(false);
   const currentClientHeight = ref(0);
@@ -24,7 +24,7 @@ export function useScroll(elRef: Ref<HTMLElement>) {
     currentScrollLeft.value = scrollLeft;
     currentScrollWidth.value = scrollWidth;
   };
-  const scrollListenerHandler = throttle(() => {
+  const handler = () => {
     if (el === window) {
       setVal(document.documentElement);
     } else {
@@ -35,7 +35,8 @@ export function useScroll(elRef: Ref<HTMLElement>) {
     if (currentClientHeight.value + currentScrollTop.value >= currentScrollHeight.value - 1) {
       isReachBottom.value = true;
     }
-  }, 50);
+  };
+  const scrollListenerHandler = isThrottel ? throttle(handler, 50) : handler;
   onMounted(() => {
     if (elRef?.value) {
       el = elRef.value;
@@ -55,6 +56,6 @@ export function useScroll(elRef: Ref<HTMLElement>) {
     scrollHeight: currentScrollHeight,
     clientWidth: currentClientWidth,
     scrollLeft: currentScrollLeft,
-    scrollWidth: currentScrollWidth
+    scrollWidth: currentScrollWidth,
   };
 }

@@ -8,12 +8,14 @@ import { useScroll } from '@/hooks/useScroll';
  * @returns 处理后需渲染数组
  */
 export function useScrollOrient(listData: dataType[], domRef: Ref<HTMLElement>) {
-  const scrollRation = 0.35;
+  const scrollRation = 0.6;
   // 目标dom元素滚动监听下的相关数据hook
-  const { clientWidth, scrollLeft } = useScroll(domRef);
+  const { clientWidth, scrollLeft } = useScroll(domRef, false);
   const currentIndex = ref<number>(0);
   const scrollData = ref<dataType[][]>([]);
   const initScrollLeft = ref(0);
+  let startTime = 0;
+
   const processedData = computed(() => {
     if (!listData || !listData.length) return [];
     let middleArray: dataType[] = [];
@@ -58,6 +60,7 @@ export function useScrollOrient(listData: dataType[], domRef: Ref<HTMLElement>) 
         'touchstart',
         (e) => {
           e.stopPropagation();
+          startTime = Date.now();
         },
         { passive: true }
       );
@@ -72,18 +75,21 @@ export function useScrollOrient(listData: dataType[], domRef: Ref<HTMLElement>) 
         'touchend',
         (e) => {
           e.stopPropagation();
+          const diffTime = Date.now() - startTime;
+          startTime = 0;
           let index = currentIndex.value;
           let scroll = initScrollLeft.value;
+          console.log(111, scrollLeft.value, initScrollLeft.value, diffTime);
           if (scrollLeft.value > initScrollLeft.value) {
             const remainder = scrollLeft.value % clientWidth.value;
-            if (remainder > clientWidth.value * scrollRation) {
+            if (diffTime < 250 || remainder > clientWidth.value * scrollRation) {
               scroll += clientWidth.value;
               index++;
             }
           } else {
             const diffVal = initScrollLeft.value - scrollLeft.value;
             const remainder = diffVal % clientWidth.value;
-            if (remainder > clientWidth.value * scrollRation) {
+            if (diffTime < 250 || remainder > clientWidth.value * scrollRation) {
               scroll -= clientWidth.value;
               index--;
             }
