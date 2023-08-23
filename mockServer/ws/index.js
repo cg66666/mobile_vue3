@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
-module.exports = () => {
+module.exports = (server) => {
   // 创建 WebSocket 服务器
-  const wss = new WebSocket.Server({ port: 3000 });
+  const wss = new WebSocket.Server({ server });
   wss.on('connection', (ws) => {
     console.log('WebSocket 连接已建立！');
     ws.on('message', (message) => {
@@ -22,7 +22,7 @@ module.exports = () => {
               type: 'message',
               user: 'service_001',
               time: Date.now(),
-              msg: `服务器回复：${msg.msg}`
+              msg: `服务器回复：${msg.msg}`,
             })
           );
         }, delay);

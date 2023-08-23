@@ -55,8 +55,23 @@ export function useScrollOrient(listData: dataType[], domRef: Ref<HTMLElement>) 
   onMounted(() => {
     if (domRef.value) {
       domRef.value.addEventListener(
+        'touchstart',
+        (e) => {
+          e.stopPropagation();
+        },
+        { passive: true }
+      );
+      domRef.value.addEventListener(
+        'touchmove',
+        (e) => {
+          e.stopPropagation();
+        },
+        { passive: true }
+      );
+      domRef.value.addEventListener(
         'touchend',
-        () => {
+        (e) => {
+          e.stopPropagation();
           let index = currentIndex.value;
           let scroll = initScrollLeft.value;
           if (scrollLeft.value > initScrollLeft.value) {

@@ -14,7 +14,7 @@ export function useWebSocket<T>(isHeart: boolean, wsUrl?: string) {
   const maxTime = 10;
   const backMsg = ref<T>();
   const initWs = () => {
-    ws = new WebSocket(wsUrl ?? 'ws://localhost:3000');
+    ws = new WebSocket(wsUrl ?? 'ws://110.40.134.47:8080');
     ws.onopen = () => {
       console.log('WebSocket 连接已建立！');
       if (isHeart) {

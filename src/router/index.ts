@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import { useLogin } from '@/stores';
 import { verifyToken } from '@/service/login';
 
@@ -13,13 +13,13 @@ declare module 'vue-router' {
     // };
   }
 }
-
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+let routes: RouteRecordRaw[] = [];
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  routes = [
+    ...routes,
     {
-      path: '/',
-      redirect: '/home'
+      path: '/:chapters(\\w+)*',
+      redirect: '/home',
       // name: 'home',
       // component: Home
     },
@@ -32,12 +32,12 @@ const router = createRouter({
       path: '/home',
       component: () => import('@/pages/home/HomePage.vue'),
       meta: {
-        title: '首页'
+        title: '首页',
         // transition: {
         //   enter: 'animate__slideInLeft',
         //   leave: 'animate__slideOutLeft'
         // }
-      }
+      },
       // ]
     },
     {
@@ -45,46 +45,68 @@ const router = createRouter({
       path: '/productDetails',
       component: () => import('@/pages/productDetails/ProduceDetailsPage.vue'),
       meta: {
-        title: '商品详情'
+        title: '商品详情',
         // transition: {
         //   enter: 'animate__slideInLeft',
         //   leave: 'animate__slideOutLeft'
         // }
-      }
+      },
     },
     {
       name: 'order',
       path: '/order',
       component: () => import('@/pages/order/OrderPage.vue'),
       meta: {
-        title: '订单'
-      }
+        title: '订单',
+      },
     },
     {
       name: 'personal',
       path: '/personal',
       component: () => import('@/pages/personal/PersonalPage.vue'),
       meta: {
-        title: '个人主页'
-      }
+        title: '个人主页',
+      },
     },
     {
       name: 'login',
       path: '/login',
       component: () => import('@/pages/login/LoginPage.vue'),
       meta: {
-        title: '登录'
-      }
+        title: '登录',
+      },
     },
     {
       name: 'service',
       path: '/service',
       component: () => import('@/pages/service/ServicePage.vue'),
       meta: {
-        title: '客服'
-      }
-    }
-  ]
+        title: '客服',
+      },
+    },
+  ];
+} else {
+  routes = [
+    ...routes,
+    {
+      name: 'every',
+      path: '/:chapters(\\w+)*',
+      redirect: '/pcQrcode',
+    },
+    {
+      name: 'pcQrcode',
+      path: '/pcQrcode',
+      meta: {
+        title: '提示',
+      },
+      component: () => import('@/pages/pcQrcode/pcQrcode.vue'),
+    },
+  ];
+}
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
 });
 
 // 需要登录校验的路由name

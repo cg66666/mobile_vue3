@@ -75,7 +75,7 @@ const addList = async () => {
     type: 'message',
     user: loginStore.name,
     time: Date.now(),
-    msg: inputVal.value
+    msg: inputVal.value,
   };
   showList.value.push(handleMsg as wsType);
   await nextTick();
@@ -205,6 +205,8 @@ watch(backMsg, async (nv) => {
       top: -7px;
       background: $brandColor;
       border-radius: 20px;
+      font-size: 15px;
+      padding: 0;
     }
   }
 }

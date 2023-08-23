@@ -11,31 +11,31 @@
     <WhiteCard
       class="oneTest"
       :style="{
-        height: '150px'
+        height: '150px',
       }"
     ></WhiteCard>
     <WhiteCard
       class="oneTest"
       :style="{
-        height: '90px'
+        height: '90px',
       }"
     ></WhiteCard>
     <WhiteCard
       class="oneTest"
       :style="{
-        height: '130px'
+        height: '130px',
       }"
     ></WhiteCard>
     <WhiteCard
       class="oneTest"
       :style="{
-        height: '100px'
+        height: '100px',
       }"
     ></WhiteCard>
     <WhiteCard
       class="oneTest"
       :style="{
-        height: '140px'
+        height: '140px',
       }"
     ></WhiteCard>
     <Teleport :to="app">
@@ -44,7 +44,7 @@
           class="oneTest"
           :style="{
             height: '140px',
-            borderRadius: '0'
+            borderRadius: '0',
           }"
         >
           <SvgIcon name="left" class="settingBack" @click="appBack" />
@@ -54,7 +54,7 @@
           class="oneTest"
           :style="{
             height: '140px',
-            borderRadius: '0'
+            borderRadius: '0',
           }"
         >
         </WhiteCard>
@@ -62,7 +62,7 @@
           class="oneTest"
           :style="{
             height: '140px',
-            borderRadius: '0'
+            borderRadius: '0',
           }"
         >
         </WhiteCard>
@@ -133,7 +133,9 @@ watch(
   height: 100%;
   position: relative;
   overflow: hidden;
-  padding: 10px;
+  padding: 10px 10px 55px 10px;
+  overflow: scroll;
+  box-sizing: border-box;
   .setting {
     font-size: 20px;
     margin-left: 250px;

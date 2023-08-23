@@ -7,8 +7,9 @@ export interface IData<T> {
   data: T;
 }
 export const instance = axios.create({
+  // baseURL: '/mobile_Vue3',
   baseURL: '/mobile_Vue3',
-  timeout: 30 * 1000 // 统一设置超时时间
+  timeout: 30 * 1000, // 统一设置超时时间
 });
 
 instance.interceptors.request.use(

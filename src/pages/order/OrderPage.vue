@@ -14,7 +14,6 @@
     >
       <div class="dialogContainer">
         <div class="countdown">{{ minute }}:{{ second }}</div>
-
         <div ref="qrCodeUrl" class="qrCode"></div>
       </div>
     </Dialog>
@@ -146,7 +145,7 @@ const showTime = computed(() => (currentDiffTime.value / 1000).toFixed(0));
       margin-left: 5.4px;
       background: $brandColor;
       border-radius: 20px;
-      font-size: 18px;
+      font-size: 17px;
       height: 35px;
       border: none;
       padding: 0 20px;

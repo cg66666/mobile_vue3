@@ -71,19 +71,21 @@
       </div>
     </div>
     <Transition name="coverPage">
-      <div class="container" v-if="showResultPage">
-        <div class="headContainer">
-          <SvgIcon
-            name="left"
-            size="0.36rem"
-            @click="
-              () => {
-                showResultPage = false;
-              }
-            "
-          />
+      <div class="coverPage" v-if="showResultPage">
+        <div class="container">
+          <div class="headContainer">
+            <SvgIcon
+              name="left"
+              size="0.36rem"
+              @click="
+                () => {
+                  showResultPage = false;
+                }
+              "
+            />
+          </div>
+          搜索结果页
         </div>
-        搜索结果页
       </div>
     </Transition>
   </div>
@@ -138,6 +140,8 @@ const getWordList = debounce(() => {
 const goSearch = (needWord?: boolean) => {
   if (!searchWord.value && needWord) return;
   showResultPage.value = true;
+  console.log(111);
+
   const tempArray =
     window.localStorage
       .getItem('searchHistory')
@@ -362,7 +366,7 @@ watchEffect(() => {
 }
 .coverPage-enter-to,
 .coverPage-leave-from {
-  top: 0;
+  top: 0rem;
 }
 .coverPage-leave-active {
   transition: all 1s ease;
