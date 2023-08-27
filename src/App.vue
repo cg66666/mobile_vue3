@@ -9,7 +9,7 @@
   </router-view> -->
   <RouterView />
   <BottomTabs class="tabbar" />
-  <!--  -->
+  <!-- 开发模式水印 -->
   <canvas
     v-if="mode === 'development'"
     ref="watermark"
@@ -70,7 +70,6 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
 <style lang="scss">
 #app {
   -webkit-font-smoothing: antialiased;

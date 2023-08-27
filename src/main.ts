@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import VConsole from 'vconsole';
 import App from './App.vue';
 import router from './router';
 import 'amfe-flexible';
@@ -16,6 +17,9 @@ app.use(router);
 app.use(Plugin);
 // const w = document.documentElement.clientWidth;
 // document.documentElement.style.fontSize = w / 10 + 'px';
+if (import.meta.env.MODE === 'development') {
+  new VConsole();
+}
 
 app.mount('#app');
 // 自动注册全局的组件

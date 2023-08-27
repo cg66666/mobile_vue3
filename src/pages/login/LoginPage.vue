@@ -25,7 +25,7 @@
       <div
         class="inputContainer passwordInputContainer"
         :style="{
-          marginTop: '20px'
+          marginTop: '20px',
         }"
         id="PasswordInput"
       >
@@ -106,8 +106,8 @@ const loginStore = useLogin();
 const state = reactive<loginDataType>({
   loginData: {
     phone: '',
-    password: ''
-  }
+    password: '',
+  },
 });
 const checked = ref(false);
 const canLogin = computed(() => {
@@ -123,14 +123,13 @@ const setSelection = (e: any) => {
   range?.selectAllChildren(e); //range 选择obj下所有子内容
   range?.collapseToEnd(); //光标移至最后
 };
-// console.log(222, router.currentRoute.value.query);
 
 // 登录逻辑函数
 const goLogin = async () => {
   if (!checked.value) return showToast('请先阅读并统一协议');
   const userInfo = await toLogin({
     phone: state.loginData.phone.replace(/[ ]/g, ''),
-    password: state.loginData.password
+    password: state.loginData.password,
   });
   if (userInfo) {
     loginStore.name = userInfo.data.name;

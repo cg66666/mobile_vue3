@@ -8,14 +8,14 @@ import { useScroll } from '@/hooks/useScroll';
  * @returns 处理后需渲染数组
  */
 export function useScrollOrient(listData: dataType[], domRef: Ref<HTMLElement>) {
-  const scrollRation = 0.6;
+  const scrollRation = 0.5;
   // 目标dom元素滚动监听下的相关数据hook
   const { clientWidth, scrollLeft } = useScroll(domRef, false);
   const currentIndex = ref<number>(0);
   const scrollData = ref<dataType[][]>([]);
   const initScrollLeft = ref(0);
   let startTime = 0;
-
+  const maxLength = listData.length;
   const processedData = computed(() => {
     if (!listData || !listData.length) return [];
     let middleArray: dataType[] = [];
@@ -79,14 +79,13 @@ export function useScrollOrient(listData: dataType[], domRef: Ref<HTMLElement>) 
           startTime = 0;
           let index = currentIndex.value;
           let scroll = initScrollLeft.value;
-          console.log(111, scrollLeft.value, initScrollLeft.value, diffTime);
-          if (scrollLeft.value > initScrollLeft.value) {
+          if (scrollLeft.value + 3 > initScrollLeft.value && index !== 3) {
             const remainder = scrollLeft.value % clientWidth.value;
             if (diffTime < 250 || remainder > clientWidth.value * scrollRation) {
               scroll += clientWidth.value;
               index++;
             }
-          } else {
+          } else if (scrollLeft.value + 3 < initScrollLeft.value && index !== 0) {
             const diffVal = initScrollLeft.value - scrollLeft.value;
             const remainder = diffVal % clientWidth.value;
             if (diffTime < 250 || remainder > clientWidth.value * scrollRation) {
@@ -94,6 +93,7 @@ export function useScrollOrient(listData: dataType[], domRef: Ref<HTMLElement>) 
               index--;
             }
           }
+
           setTimeout(() => {
             domRef.value?.scrollTo({ left: scroll, behavior: 'smooth' });
             initScrollLeft.value = scroll;

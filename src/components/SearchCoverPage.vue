@@ -15,7 +15,7 @@
               }
             "
           />
-          <div class="searchButton" @click="() => goSearch(true)">
+          <div class="searchButton" @click="goSearch">
             <div>搜索</div>
           </div>
         </div>
@@ -27,7 +27,7 @@
               class="searchItem"
               v-for="item in searchWordList"
               :key="item.label"
-              @click="() => goSearch(true)"
+              @click="goSearch"
             >
               <SvgIcon class="itemIcon" name="sousuo" color="#aaa" size="0.385rem" />{{
                 item.label
@@ -44,7 +44,7 @@
                 @click="
                   () => {
                     if (typeof item === 'boolean') return;
-                    goSearch(false);
+                    goSearch();
                   }
                 "
               >
@@ -137,20 +137,21 @@ const getWordList = debounce(() => {
     });
 }, 500);
 // 进入搜索页面
-const goSearch = (needWord?: boolean) => {
-  if (!searchWord.value && needWord) return;
+const goSearch = () => {
+  if (!props.defaultSearchWord) return;
   showResultPage.value = true;
-  console.log(111);
-
   const tempArray =
     window.localStorage
       .getItem('searchHistory')
       ?.split(',')
       .filter((item) => item) || [];
-  if (searchWord.value && !tempArray.includes(searchWord.value)) tempArray.push(searchWord.value);
+  if (
+    (searchWord.value || props.defaultSearchWord) &&
+    !tempArray.includes(searchWord.value || props.defaultSearchWord)
+  )
+    tempArray.push(searchWord.value || props.defaultSearchWord);
   historyList.value = tempArray;
   window.localStorage.setItem('searchHistory', tempArray.join(','));
-  console.log('333tempArray', tempArray);
 };
 
 const handleArray = computed(() => {
